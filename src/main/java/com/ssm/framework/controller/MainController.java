@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
+	//DI(依存性注入)
 	//7
-	@GetMapping("view1")
-	public String start() {
+	@GetMapping("view2") //URLマッピング
+	public String start() { //リクエスト　ハンドラ　メソッド
 		return "input";
 	}
 	
+	//HTTPメソッド
 	@PostMapping("confirm")
 	public String confirmView(Model model,@RequestParam String name, @RequestParam Integer age,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate birth) {
