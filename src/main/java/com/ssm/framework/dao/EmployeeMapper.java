@@ -11,6 +11,7 @@ import com.ssm.framework.entity.Employee;
 @Mapper
 public interface EmployeeMapper {
 	
-	 List<Employee> findAll();
+	//社員情報全て検索
+	List<Employee> findAll();
 
 }
