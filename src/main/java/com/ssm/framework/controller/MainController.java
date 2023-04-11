@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-	
+	//1
 	@GetMapping("view1")
 	public String start() {
 		return "input";
