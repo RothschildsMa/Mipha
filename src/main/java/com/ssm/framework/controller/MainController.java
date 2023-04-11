@@ -18,6 +18,12 @@ public class MainController {
 		return "input";
 	}
 	
+	//ssm
+	//spring   springMVC  Mybatis
+	
+	//ssh
+	//struct   spring   hibernate
+	
 	//HTTPメソッド
 	@PostMapping("confirm")
 	public String confirmView(Model model,@RequestParam String name, @RequestParam Integer age,
