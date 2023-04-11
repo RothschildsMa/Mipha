@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-	//DI(依存性注入)
+	//DI(依存性注入)　spring 根幹※
 	//7
 	@GetMapping("view2") //URLマッピング
 	public String start() { //リクエスト　ハンドラ　メソッド
 		return "input";
 	}
-	
 	//ssm
 	//spring   springMVC  Mybatis
 	
