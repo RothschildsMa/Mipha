@@ -8,7 +8,7 @@
 	<h1>情報一覧サンプル</h1>
 	<table>
        <tbody>
-          <tr th:each="employee : ${employeeList}" th:object="${employee}" class="align-middle">
+          <tr th:each="employee : ${employeeList}" th:object="${employee}">
              <td th:text="*{id}"></td>
              <td th:text="*{employeeId}"></td>
              <td th:text="*{password}"></td>
