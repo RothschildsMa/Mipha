@@ -31,6 +31,7 @@ public class MainController {
 	//DB取得&出力サンプル
     @GetMapping(value = "/employee/list")
     public String showList(Model model) {
+    	//ローワーキャメルケース　命名規則
         List<Employee> empList = employeeService.findAll();
         model.addAttribute("employeeList", empList);
         return "output";
