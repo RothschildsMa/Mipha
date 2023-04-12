@@ -19,7 +19,10 @@ public class MainController {
 	}
 	
 	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-	
+	@GetMapping("akimi") //URLマッピング
+	public String restart() { //リクエスト　ハンドラ　メソッド
+		return "team2/akimi";
+	}
 	
 	
 	
