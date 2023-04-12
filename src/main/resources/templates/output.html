@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>情報一覧サンプル</h1>
+	<table>
+       <tbody>
+          <tr th:each="employee : ${employeeList}" th:object="${employee}" class="align-middle">
+             <td th:text="*{id}"></td>
+             <td th:text="*{employeeId}"></td>
+             <td th:text="*{password}"></td>
+             <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
+             <td th:text="*{employeeName}"></td>
+             <td th:text="*{employeeNameKana}"></td>
+             <td th:text="*{employeeGenderId}"></td>
+             <td th:text="*{employeeAge}"></td>
+             <td th:text="*{employeeDepartmentId}"></td>
+             <td th:text="*{employeePhoneNumber}"></td>
+             <td th:text="*{employeeMail}"></td>
+
+           </tr>
+        </tbody>
+
+    </table>
+
+
+
+</body>
+</html>
