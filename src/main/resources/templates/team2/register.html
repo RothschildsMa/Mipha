@@ -70,7 +70,7 @@
 	<form action="/sample/register" method="post">
 		<dl>
 			<dt>社員ID<label class="required"></label></dt>
-			<dd><input type="text" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="S000000000（10桁）" maxlength="10" required/></input></dd>
+			<dd><input type="text" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required/></input></dd>
 		
 		
 			<dt>入社年月日</dt>
@@ -193,14 +193,13 @@
 				<option value="98">98</option>
 				<option value="99">99</option>
 				<option value="100">100</option>
-				</select>
-				</dd>
+				</select></input></dd>
 		
 		
 				<div class="box">
 				<dt>所属</dt>
 				<dd><select name="所属">
-					<option value="選択してください" selected disabled>選択してください</option>
+					<option value="" selected disabled>選択してください</option>
 					<option value="所属不明">所属不明</option>
 					<option value="管理部">管理部</option>
 					<option value="営業部">営業部</option>
@@ -212,14 +211,18 @@
 			
 				<dt>電話番号 </dt>
 				<dd><input type="tel" name="電話番号" size="20"  placeholder="ハイフンなし（11桁）" maxlength="11"/></input></dd>
-			    
-			    <dt>メールアドレス<label class="required"></label></dt>
-				<dd><input type="email" name="メールアドレス" size="30"  placeholder="＠を含む最大50文字" maxlength="50" required/></input></dd>
+			
+
+            
+            
+                <dt>メールアドレス<label class="required"></label></dt>
+                  
+			
+					<dd><input type="email" name="メールアドレス" size="30"  placeholder="＠を含む最大50文字" maxlength="50" required/></input></dd>
          </dl>
 	<br/>
 		
 		<p>※社員IDは既に存在しています。画面を閉じて再度お試しください。</p>
-		
 				
 				<div style="text-align: right">
 					<span><input type="submit" value="登録">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
