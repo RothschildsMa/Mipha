@@ -16,7 +16,8 @@ import com.ssm.framework.service.EmployeeService;
 
 @Controller
 public class MainController {
-	//DI(依存性注入)　spring 根幹※　//test2
+
+	//DI(依存性注入)　spring 根幹※ test
 	//7
 	@GetMapping("view2") //URLマッピング
 	public String start() { //リクエスト　ハンドラ　メソッド
