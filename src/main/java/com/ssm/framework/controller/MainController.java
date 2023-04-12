@@ -19,10 +19,18 @@ public class MainController {
 	}
 	
 	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+	
+	@GetMapping("login") //URLマッピング
+	public String loginView() { //リクエスト　ハンドラ　メソッド
+		return "team1/Login";
+	}
+	
+	
 	@GetMapping("akimi") //URLマッピング
 	public String restart() { //リクエスト　ハンドラ　メソッド
 		return "team2/akimi";
 	}
+	
 	
 	
 	
