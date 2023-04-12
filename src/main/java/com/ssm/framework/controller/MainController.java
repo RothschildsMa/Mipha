@@ -15,7 +15,7 @@ public class MainController {
 	//7
 	@GetMapping("view2") //URLマッピング
 	public String start() { //リクエスト　ハンドラ　メソッド
-		return "input";
+		return "team2/input";
 	}
 	
 	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
