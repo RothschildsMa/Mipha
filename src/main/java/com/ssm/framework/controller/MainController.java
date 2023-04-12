@@ -39,7 +39,7 @@ public class MainController {
 	public String showList1(Model model) {
 		List<Employee> empList = employeeService.findAll1();
 		model.addAttribute("employeeList", empList);
-		return "team2/employInformationDisplay";
+		return "team2/akimi";
 	}
 
 	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
