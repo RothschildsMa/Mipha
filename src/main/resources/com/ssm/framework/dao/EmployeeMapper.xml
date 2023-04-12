@@ -9,11 +9,6 @@
     <select id="findAll" resultType="com.ssm.framework.entity.Employee">
         SELECT * FROM t_employee WHERE DEL_FLG = 0
     </select>
-    
-    
-    
-    
-    
-    
+
     
 </mapper>
