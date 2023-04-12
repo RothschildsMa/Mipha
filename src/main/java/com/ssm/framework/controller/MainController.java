@@ -20,14 +20,14 @@ public class MainController {
 	
 	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	
-	@GetMapping("login") //URLマッピング
-	public String loginView() { //リクエスト　ハンドラ　メソッド
+	@GetMapping("login")
+	public String loginView() {
 		return "team1/Login";
 	}
 	
 	
-	@GetMapping("akimi") //URLマッピング
-	public String restart() { //リクエスト　ハンドラ　メソッド
+	@GetMapping("akimi")
+	public String restart() {
 		return "team2/akimi";
 	}
 	
