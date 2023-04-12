@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link rel="stylesheet" type="text/css" href="/src/main/resources/static/EmployInformationDisplay.css">
+	<link rel="stylesheet" type="text/css" href="/employInformationDisplay.css">
 	<title>社员信息管理系统</title>
 </head>
 <body>
@@ -13,7 +13,6 @@
 		<p class="p1">社員情報一覧</p>
 	</div>
 	
-	<!-- 输入表单 -->
 	<form>
 		<div class="firstSelectRow_css">
 			<label for="member-id" class="label1">社员ID:</label>
@@ -24,6 +23,8 @@
 				<option value="开发二部">开发二部</option>
 				<option value="开发三部">开发三部</option>
 			</select><br><br>
+			<input type="submit" value="登陆" class="login_css">
+			<input type="submit" value="搜索" class="search_css">
 		</div>
 		<div class="twoSelectRow_css">
 			<label for="start-date" class="label3">入社年月日:</label>
@@ -32,14 +33,10 @@
 			<input type="date" id="end-date" name="end-date"class="timeEnd"><br><br>
 		</div>
 		
-<div class="btuFirstRow_css">
-	<input type="submit" value="登陆" class="login_css">
-	<input type="submit" value="搜索" class="search_css">
-</div>
 		<input type="submit" value="删除" class="delete_css">
 	</form>
 	
-	<!-- 社员信息表格 -->
+	<div class="table-container">
 	<table>
 		<tr class="trFirst_css">
 			<th>选择</th>
@@ -77,6 +74,23 @@
 			<td>13812345678</td>
 			<td>111111.com@gmail</td>
 		</tr>
+		
+		<tr th:each="employee : ${employeeList}" th:object="${employee}">
+		     <td th:
+             <td th:text="*{id}"></td>
+             <td th:text="*{employeeId}"></td>
+             <td th:text="*{password}"></td>
+             <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
+             <td th:text="*{employeeName}"></td>
+             <td th:text="*{employeeNameKana}"></td>
+             <td th:text="*{employeeGenderId}"></td>
+             <td th:text="*{employeeAge}"></td>
+             <td th:text="*{employeeDepartmentId}"></td>
+             <td th:text="*{employeePhoneNumber}"></td>
+             <td th:text="*{employeeMail}"></td>
+
+           </tr>
 	</table>
+	<div>
 </body>
 </html>

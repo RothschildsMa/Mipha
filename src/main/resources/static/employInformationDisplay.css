@@ -89,19 +89,13 @@ color: aliceblue;
   background-color:blue;
   color: aliceblue;
 }
-.delete_css{
-  right: 30px;
-  position: absolute;
-  font-size: large;
-  bottom: 5%;
-  background-color:blue;
-  color: aliceblue;
-}
+
 table{
   width: 100%;
   border-collapse: collapse;
   border: 1px solid black;
   margin-top: 5px;
+  height: 100%;
 }
 .trFirst_css{
 background-color: deepskyblue;
@@ -115,4 +109,16 @@ td{
   text-overflow: ellipsis;
   white-space: nowrap;
   border: 1px solid black;
+}
+.table-container{
+  height: 380px;
+  overflow: scroll;
+}
+.delete_css{
+  right: 30px;
+  position: absolute;
+  font-size: large;
+  bottom: 10px;
+  background-color:blue;
+  color: aliceblue;
 }
