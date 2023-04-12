@@ -17,6 +17,28 @@ public class MainController {
 	public String start() { //リクエスト　ハンドラ　メソッド
 		return "input";
 	}
+	
+	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 	//HTTPメソッド
 	@PostMapping("confirm")
