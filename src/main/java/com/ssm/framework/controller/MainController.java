@@ -28,7 +28,7 @@ public class MainController {
 	@Autowired
     private EmployeeService employeeService;
     
-	//DB取得&出力サンプル
+	//DB取得&出力サンプル1
     @GetMapping(value = "/employee/list")
     public String showList(Model model) {
     	//ローワーキャメルケース　命名規則
