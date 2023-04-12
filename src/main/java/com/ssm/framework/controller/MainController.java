@@ -49,6 +49,11 @@ public class MainController {
 		return "team2/akimi";
 	}
 	
+	@GetMapping("view3")
+	public String employInformationDisplay() {
+		return "team2/employInformationDisplay";
+	}
+	
 	
 	
 	
