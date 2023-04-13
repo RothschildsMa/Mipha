@@ -30,14 +30,14 @@ public class MainController {
 	//DB取得&出力サンプル
 	@GetMapping(value = "/employee/list")
 	public String showList(Model model) {
-		List<Employee> empList = employeeService.findAll1();
+		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		return "output";
 	}
 	
 	@GetMapping(value = "/employee/list1")
 	public String showList1(Model model) {
-		List<Employee> empList = employeeService.findAll1();
+		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		return "team2/akimi";
 	}
