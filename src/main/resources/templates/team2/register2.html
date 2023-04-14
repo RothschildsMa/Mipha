@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>社員情報登録画面</title>
+<style>
+	.登録フォーム {
+        font-family: arial;
+        font-size: 17px;
+        margin: 0px;
+        width: 557px;
+        height: 1000px;
+        margin: 0 auto;
+    }
+    
+    dl {
+		float: left;
+		width: 100%;  /*変えられない数値*/
+		border-right: 1px solid#dddddd;
+		border-bottom: 1px solid #dddddd;
+    }
+    dl dt {
+        float: left;
+        clear: left;
+        width: 40%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        background: #dddddd;
+        padding: 4%;
+        margin-bottom: 0px;
+		border-top: 1px solid #FFFF;
+    }
+    dl dd {
+        float: left;
+        margin-left: 0px;
+		margin-right: 0px;
+        width:250px;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3.5%;
+        margin-bottom: 0px;
+        padding-left : 1.1em;
+		border-top: 1px solid #dddddd;
+    }
+    .required::after {
+        content: "必須";
+        background-color: #F06060;
+        color: #fff;
+        font-size: 13px;
+        font-weight: bold;
+        min-width: 10px;
+        padding: 4px 6px;
+        margin: 1px 8px;
+        line-height: 1;
+        vertical-align: middle;
+        white-space: nowrap;
+        text-align: left; 
+        border-radius: 10px;
+        display: inline; 
+    }
+	.box select{
+              width: 140px;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="登録フォーム">
+	<h3>社員情報登録画面</h3>
+	<form th:action="@{/emp/insert}" th:object="${form}" th:method="post">
+		<dl>
+			<dt>社員ID<label class="required"></label></dt>
+			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required/></input></dd>
+		
+			<dt>パスワード<label class="required"></label></dt>
+			<dd><input type="text" th:field="*{password}" pattern="^[0-9A-Z]+$"name="password" size="20" placeholder="N0000000（8桁）" maxlength="8" required/></input></dd>
+		
+			<dt>入社年月日</dt>
+			<dd><input type="date" th:field="*{joinDate}" name="jdate" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください" value=""></input></dd>
+		
+		
+			<dt>氏名漢字</dt>
+			<dd><input type="text" th:field="*{employeeName}" name="氏名漢字" size="20"  placeholder="山田太郎（最大20文字）" maxlength="20"/></input></dd>
+		 
+		
+			<dt>氏名カナ</dt>
+			<dd><input type="text" th:field="*{employeeNameKana}" name="氏名カナ" size="20"  placeholder="ヤマダタロウ（最大60文字）" maxlength="60"/></input></dd>
+		
+		
+			<dt>性別</dt>
+			<dd><input type="radio" th:field="*{employeeGenderId}" th:name="性別"  th:value="001"/>男 
+				<input type="radio" th:field="*{employeeGenderId}" th:name="性別"  th:value="002"/>女
+				<input type="radio" th:field="*{employeeGenderId}" th:name="性別"  th:value="003"/>不明</input></dd>
+		
+		
+			<dt>年齢 </dt>
+			<dd><input type="number" th:field="*{employeeAge}" name="age" min="1" max="100">歳</dd>
+		
+		
+				<div class="box">
+				<dt>所属</dt>
+				<dd><select name="所属">
+					<option th:field="*{employeeDepartmentId}" th:value="001" selected disabled>選択してください</option>
+					<option value="所属不明">所属不明</option>
+					<option value="管理部">管理部</option>
+					<option value="営業部">営業部</option>
+					<option value="第一開発部">第一開発部</option>
+					<option value="第二開発部">第二開発部</option>
+					<option value="人事部">人事部</option>
+					</select></dd>
+				</div>
+			
+				<dt>電話番号 </dt>
+				<dd><input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" size="20"  placeholder="ハイフンなし（11桁）" maxlength="11"/></input></dd>
+			
+				<dt>メールアドレス<label class="required"></label></dt>
+				<dd><input type="email" th:field="*{employeeMail}" name="メールアドレス" size="30"  placeholder="＠を含む最大50文字" maxlength="50" required/></input></dd>
+			</dl>
+	<br/>
+		
+		<p>※社員IDは既に存在しています。画面を閉じて再度お試しください。</p>
+				
+				<div style="text-align: right">
+					<span><input type="submit" value="登録">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="submit" value="更新">
+				</span>
+				</div>
+	<br/>
+				<div style="text-align: right">
+					<button type="button" onclick="history.back()">閉じる</button> <!--resetではなく戻る動作にする-->
+				</div>
+					
+        </form>
+		</div>
+    
+		</body>
+</html>
