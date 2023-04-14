@@ -7,11 +7,11 @@
 <mapper namespace="com.ssm.framework.dao.EmployeeMapper">
     <!-- 全件検索 -->
     <select id="findAll" resultType="com.ssm.framework.entity.Employee">
-        SELECT * FROM t_employee WHERE DEL_FLG = 0
+        SELECT * FROM T_employee WHERE DEL_FLG = 0
     </select>
      <!-- 登録 -->
 	<insert id="add">
-	 INSERT INTO  t_employee
+	 INSERT INTO  T_employee
 	 (EMPLOYEE_ID, PASSWORD, JOIN_DATE, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA, EMPLOYEE_GENDERID, EMPLOYEE_AGE,
 	 EMPLOYEE_DEPATMENTID, EMPLOYEE_PHONENUMBER, EMPLOYEE_MAIL,<!--CREATE_USER-->)
 	  VALUES (#{employeeId}, #{password}, #{joinDate}, #{employeeName}, #{employeeNameKana}, #{employeeGenderId},
