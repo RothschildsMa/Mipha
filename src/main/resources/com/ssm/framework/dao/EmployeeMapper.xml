@@ -12,10 +12,10 @@
      <!-- 登録 -->
 	<insert id="add">
 	 INSERT INTO  T_employee
-	 (EMPLOYEE_ID,PASSWORD,JOIN_DATE, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA, EMPLOYEE_GENDERID, EMPLOYEE_AGE,
-	 EMPLOYEE_DEPATMENTID, EMPLOYEE_PHONENUMBER, EMPLOYEE_MAIL,<!--CREATE_USER-->)
-	  VALUES (#{employeeId},#{password}, #{joinDate}, #{employeeName}, #{employeeNameKana}, #{employeeGenderId},
-	  #{employeeAge}, #{employeeDepatmentId}, #{employeePhoneNumber}, #{employeeMail})
-	  </insert>
+	 (EMPLOYEE_ID,PASSWORD, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA, EMPLOYEE_AGE,
+	  EMPLOYEE_PHONENUMBER, EMPLOYEE_MAIL)
+	  VALUES (#{employeeId},#{password}, #{employeeName}, #{employeeNameKana},
+	  #{employeeAge}, #{employeePhoneNumber}, #{employeeMail})
+	</insert>
     
 </mapper>

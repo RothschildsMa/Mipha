@@ -76,9 +76,7 @@
 			<dt>パスワード<label class="required"></label></dt>
 			<dd><input type="text" th:field="*{password}" pattern="^[0-9A-Z]+$"name="password" size="20" placeholder="N0000000（8桁）" maxlength="8" required/></input></dd>
 		
-			<dt>入社年月日</dt>
-			<dd><input type="date" th:field="*{joinDate}" name="jdate" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください" value=""></input></dd>
-		
+			
 		
 			<dt>氏名漢字</dt>
 			<dd><input type="text" th:field="*{employeeName}" name="氏名漢字" size="20"  placeholder="山田太郎（最大20文字）" maxlength="20"/></input></dd>
@@ -88,28 +86,10 @@
 			<dd><input type="text" th:field="*{employeeNameKana}" name="氏名カナ" size="20"  placeholder="ヤマダタロウ（最大60文字）" maxlength="60"/></input></dd>
 		
 		
-			<dt>性別</dt>
-			<dd><input type="radio" th:field="*{employeeGenderId}" th:name="性別"  th:value="001"/>男 
-				<input type="radio" th:field="*{employeeGenderId}" th:name="性別"  th:value="002"/>女
-				<input type="radio" th:field="*{employeeGenderId}" th:name="性別"  th:value="003"/>不明</input></dd>
-		
-		
 			<dt>年齢 </dt>
 			<dd><input type="number" th:field="*{employeeAge}" name="age" min="1" max="100">歳</dd>
 		
-		
-				<div class="box">
-				<dt>所属</dt>
-				<dd><select name="所属">
-					<option th:field="*{employeeDepartmentId}" th:value="001" selected disabled>選択してください</option>
-					<option value="所属不明">所属不明</option>
-					<option value="管理部">管理部</option>
-					<option value="営業部">営業部</option>
-					<option value="第一開発部">第一開発部</option>
-					<option value="第二開発部">第二開発部</option>
-					<option value="人事部">人事部</option>
-					</select></dd>
-				</div>
+
 			
 				<dt>電話番号 </dt>
 				<dd><input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" size="20"  placeholder="ハイフンなし（11桁）" maxlength="11"/></input></dd>

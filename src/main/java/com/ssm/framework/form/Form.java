@@ -1,7 +1,6 @@
 package com.ssm.framework.form;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import lombok.Data;
 
@@ -15,7 +14,7 @@ public class Form implements Serializable{
 	private String password;
 	
 	//入社年月日
-	private Date joinDate;
+	//private Date joinDate;
 		
 	//社員名称漢字
 	private String employeeName;
@@ -24,13 +23,13 @@ public class Form implements Serializable{
 	private String employeeNameKana;
 		
 	//性別ID
-	private String employeeGenderId;
+	//private String employeeGenderId;
 		
 	//年齢
 	private int employeeAge;
 		
 	//所属ID
-	private String employeeDepartmentId;
+	//private String employeeDepartmentId;
 		
 	//電話番号
 	private String employeePhoneNumber;
