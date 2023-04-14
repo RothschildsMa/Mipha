@@ -107,7 +107,7 @@
 			</div>
 			
 				<dt>電話番号 </dt>
-				<dd><input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" size="20"  placeholder="ハイフンなし（11桁）" maxlength="11"/></input></dd>
+				<dd><input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" pattern="[\d]*" size="20"  placeholder="ハイフンなし（11桁）" maxlength="11"/></input></dd>
 			
 				<dt>メールアドレス<label class="required"></label></dt>
 				<dd><input type="email" th:field="*{employeeMail}" name="メールアドレス" size="30"  placeholder="＠を含む最大50文字" maxlength="50" required/></input></dd>
