@@ -28,7 +28,7 @@ public class MainController {
 	}
 
 
-	@GetMapping("employee/list3")
+	@GetMapping(value = "/employee/list1")
 	public String showList1(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
@@ -78,7 +78,7 @@ public class MainController {
 	public String getEmployeesByCondition(Model model, Form form) {
 		List<Employee> employees = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", employees);
-		return "team2/employInformationDisplay2";
+		return "team2/emp2";
 
 	}
 

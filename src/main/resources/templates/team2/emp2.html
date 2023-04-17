@@ -7,17 +7,17 @@
 <body>
 	<div class="header">
 		<h1 class="header_css">株式会社ＸＸＸ</h1>    
-		<button class="logout_css">ログアウ</button>
+		<button class="logout_css">ログアウト</button>
 	</div>
 	<div class="p_css">
 		<p class="p1">社員情報一覧</p>
 	</div>
 	
-	<form>
+	<form th:action="@{/employee/search}" th:object="${form}" th:method="post">
 		<div class="firstSelectRow_css">
 			<label for="member-id" class="label1">社员ID:</label>
 			<form  method="get"> 
-			<input type="text" id="employeeId" name="member-id" class="input1"><br><br>
+			<input type="text" th:field="*{employeeId}" id="employeeId" name="member-id" class="input1"><br><br>
 			</form>
 			<label for="department" class="label2">所属部门:</label>
 			<select id="department" name="department" class="select1">
@@ -40,51 +40,26 @@
 		<input type="submit" value="删除" class="delete_css">
 	</form>
 	
-	<div class="table-container">
+	<div class="table-container" th:if="${employeeList}">
 	<table>
 		<tr class="trFirst_css">
-			<th>选择</th>
+			<th>選択</th>
 			<th>社員ID</th>
-			.
 			<th>入社年月日</th>
 			<th>氏名</th>
 			<th>カタカナ</th>
-			<th>性别</th>
+			<th>性別</th>
 			<th>年齢</th>
 			<th>所属</th>
 			<th>電話番号</th>
 			<th>メールアドレス</th>
 		</tr>
-		<tr>
-			<td><input type="checkbox"></td>
-			<td><a href="#">1001</a></td>
-			<td>2022-01-01</td>
-			<td>张三</td>
-			<td>zhangsan</td>
-			<td>男</td>
-			<td>18</td>
-			<td>开发一部</td>
-			<td>13812345678</td>
-			<td>111111.com@gmail</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox"></td>
-			<td><a href="#">1001</a></td>
-			<td>2022-01-01</td>
-			<td>张三</td>
-			<td>zhangsan</td>
-			<td>男</td>
-			<td>18</td>
-			<td>开发一部</td>
-			<td>13812345678</td>
-			<td>111111.com@gmail</td>
-		</tr>
+		
 		
 		<tr th:each="employee : ${employeeList}" th:object="${employee}">
 		     
-             <td th:text="*{id}"></td>
-             <td th:text="*{employeeId}"></td>
-             <td th:text="*{password}"></td>
+             <td><input type="checkbox"></td>
+             <td><a th:href="@{/updateLink}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
              <td th:text="*{employeeNameKana}"></td>
