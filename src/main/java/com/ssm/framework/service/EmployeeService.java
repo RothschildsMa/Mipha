@@ -15,7 +15,7 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeMapper employeeMapper;
 	//社員情報すべて検索
-	public List<Employee> findAll(){
+	public List<Employee> findAll1(){
 		return employeeMapper.findAll();
 	}
 	

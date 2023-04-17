@@ -35,11 +35,11 @@ public class MainController {
 		return "output";
 	}
 	
-	@GetMapping(value = "/employee/list1")
+	@GetMapping(value = "/employee/list1") 
 	public String showList1(Model model) {
 		List<Employee> empList = employeeService.findAll1();
 		model.addAttribute("employeeList", empList);
-		return "team2/akimi";
+		return "team2/employdemo";
 	}
 
 	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
