@@ -1,28 +1,20 @@
 package com.ssm.framework.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ssm.framework.entity.Employee;
+import com.ssm.framework.form.Form;
 import com.ssm.framework.service.EmployeeService;
 
 @Controller
 public class MainController {
-
-	//DI(依存性注入)　spring 根幹※ test
-	//7
-	@GetMapping("view2") //URLマッピング
-	public String start() { //リクエスト　ハンドラ　メソッド
-		return "team2/input";
-	}
 
 	@Autowired
 	private EmployeeService employeeService;
@@ -30,43 +22,64 @@ public class MainController {
 	//DB取得&出力サンプル
 	@GetMapping(value = "/employee/list")
 	public String showList(Model model) {
-		List<Employee> empList = employeeService.findAll1();
+		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		return "output";
 	}
-	
-	@GetMapping(value = "/employee/list1") 
+
+
+	@GetMapping(value = "/employee/list1")
 	public String showList1(Model model) {
-		List<Employee> empList = employeeService.findAll1();
+		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		return "team2/employdemo";
 	}
 
-	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+	@GetMapping(value = "/employee/list2")
+	public String showList2(Model model) {
+		List<Employee> empList = employeeService.findAll();
+		model.addAttribute("employeeList", empList);
+		model.addAttribute("form", new Form());
+		return "team2/employInformationDisplay2";
+	}
+
+	@GetMapping(value = "/emp/add")
+	public String displayAdd(Model model) {
+		model.addAttribute("form", new Form());
+		return "team2/register2";
+	}
+
+	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
+	public String addToTable(Form form) {
+		// 社員情報の登録
+		employeeService.add(form); //情報挿入
+		return "redirect:/employee/list"; //リダイレクト
+	}
+
+	@RequestMapping(value = "/emp/update", method = RequestMethod.POST)
+	public String updateToTabel(Form form) {
+		// 社員情報の更新
+		employeeService.update(form); //情報挿入
+		return "redirect:/employee/list"; //リダイレクト
+	}
 
 	@GetMapping("login")
 	public String loginView() {
 		return "team1/Login";
 	}
 
+	
 	@GetMapping("akimi")
 	public String restart() {
 		return "team2/akimi";
 	}
 
-	//↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+	@RequestMapping(value = "/employee/search", method = RequestMethod.POST)
+	public String getEmployeesByCondition(Model model, Form form) {
+		List<Employee> employees = employeeService.findByCondition(form);
+		model.addAttribute("employeeList", employees);
+		return "team2/employInformationDisplay2";
 
-	//HTTPメソッド
-	@PostMapping("confirm")
-	public String confirmView(Model model, @RequestParam String name, @RequestParam Integer age,
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate birth) {
-
-		model.addAttribute("name", name);
-		model.addAttribute("age", age);
-		model.addAttribute("birth", birth);
-
-		return "confirm";
 	}
+
 }
-//testHama
-//testZ
