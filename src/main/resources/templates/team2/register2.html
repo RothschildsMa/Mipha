@@ -78,7 +78,16 @@
 
 	<div class="登録フォーム">
 	<h3>社員情報登録画面</h3>
-	<form th:action="@{/emp/insert}" th:object="${form}" th:method="post">
+	{{if .Id}}
+  <!--ユーザ情報の更新-->
+  <form action="@{/emp/update}" method="post">
+  {{else}}
+  <!--ユーザ情報の登録-->
+  <form th:action="@{/emp/insert}" th:object="${form}" th:method="post"> 
+  {{end}}
+	
+		
+		
 		<dl>
 			<dt>社員ID<label class="required"></label></dt>
 			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required/></input></dd>
