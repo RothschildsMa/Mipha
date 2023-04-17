@@ -22,12 +22,19 @@ public class EmployeeService {
 
 	}
 
+	//社員情報登録
 	public void add(Form form) {
 		employeeMapper.add(form);
 	}
-	
-	public List<Employee> findByCondition(Form form){
+
+	//社員情報更新
+	public void update(Form form) {
+		employeeMapper.update(form);
+	}
+
+	public List<Employee> findByCondition(Form form) {
 		return employeeMapper.iFindByCondition(form);
+
 	}
 
 }

@@ -14,7 +14,9 @@ public interface EmployeeMapper {
 	List<Employee> findAll();
 
 	void add(Form form);
-	
+
+	void update(Form form);
+
 	List<Employee> iFindByCondition(Form form);
 
 }
