@@ -26,14 +26,14 @@ public class MainController {
 		model.addAttribute("employeeList", empList);
 		return "output";
 	}
-	
+
 	@GetMapping(value = "/employee/list1")
 	public String showList1(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		return "team2/akimi";
 	}
-	
+
 	@GetMapping(value = "/employee/list2")
 	public String showList2(Model model) {
 		List<Employee> empList = employeeService.findAll();
@@ -41,20 +41,26 @@ public class MainController {
 		model.addAttribute("form", new Form());
 		return "team2/employInformationDisplay2";
 	}
-	
-	
+
 	@GetMapping(value = "/emp/add")
-    public String displayAdd(Model model) {
-        model.addAttribute("form", new Form());
-        return "team2/register2";
-    }
-	
+	public String displayAdd(Model model) {
+		model.addAttribute("form", new Form());
+		return "team2/register2";
+	}
+
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
-    public String addToTable(Form form) {
-        // 社員情報の登録
+	public String addToTable(Form form) {
+		// 社員情報の登録
 		employeeService.add(form); //情報挿入
-        return "redirect:/employee/list"; //リダイレクト
-    }
+		return "redirect:/employee/list"; //リダイレクト
+	}
+
+	@RequestMapping(value = "/emp/update", method = RequestMethod.POST)
+	public String updateToTabel(Form form) {
+		// 社員情報の更新
+		employeeService.update(form); //情報挿入
+		return "redirect:/employee/list"; //リダイレクト
+	}
 
 	@GetMapping("login")
 	public String loginView() {
@@ -65,12 +71,13 @@ public class MainController {
 	public String restart() {
 		return "team2/akimi";
 	}
-	
+
 	@RequestMapping(value = "/employee/search", method = RequestMethod.POST)
-	public String getEmployeesByCondition(Model model,Form form) {
+	public String getEmployeesByCondition(Model model, Form form) {
 		List<Employee> employees = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", employees);
 		return "team2/employInformationDisplay2";
+
 	}
 
 }

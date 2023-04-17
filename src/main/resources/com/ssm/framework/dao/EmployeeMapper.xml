@@ -11,12 +11,20 @@
     </select>
      <!-- 登録 -->
 	<insert id="add">
-	 INSERT INTO  T_employee
-	 (EMPLOYEE_ID,PASSWORD,JOIN_DATE, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA,EMPLOYEE_GENDERID, EMPLOYEE_AGE,
-	  EMPLOYEE_DEPATMENTID,EMPLOYEE_PHONENUMBER, EMPLOYEE_MAIL)
-	  VALUES (#{employeeId},#{password},#{joinDate},#{employeeName},#{employeeNameKana},#{employeeGenderId},
-	  #{employeeAge},#{employeeDepatmentId}, #{employeePhoneNumber}, #{employeeMail})
+	  INSERT INTO T_employee (EMPLOYEE_ID, PASSWORD, JOIN_DATE, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA, 
+	  EMPLOYEE_GENDERID, EMPLOYEE_AGE, EMPLOYEE_DEPATMENTID, EMPLOYEE_PHONENUMBER, EMPLOYEE_MAIL)
+	  VALUES (#{employeeId}, #{password}, #{joinDate}, #{employeeName}, #{employeeNameKana}, #{employeeGenderId},
+	   #{employeeAge}, #{employeeDepatmentId}, #{employeePhoneNumber}, #{employeeMail})
 	</insert>
+	
+	<!-- 更新 -->
+	<update id="update">
+	  UPDATE T_employee SET
+	  JOIN_DATE = #{{joinDate}, EMPLOYEE_NAME = #{employeeName}, EMPLOYEE_NAMEKANA = #{employeeNameKana}, 
+	  EMPLOYEE_GENDERID = #{employeeGenderId}, EMPLOYEE_AGE = #{employeeAge}, EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}, 
+	  EMPLOYEE_PHONENUMBER =, #{employeePhoneNumber}, EMPLOYEE_MAIL = #{employeeMail}
+	  WHERE EMPLOYEE_ID = #{employeeId}
+	</update>
 	
 	 <!--条件检索-->
     <select id="iFindByCondition" resultType="com.ssm.framework.entity.Employee">
