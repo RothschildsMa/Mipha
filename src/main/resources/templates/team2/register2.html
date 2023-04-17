@@ -59,19 +59,13 @@
         border-radius: 10px;
         display: inline; 
     }
-	.box select{
-              width: 140px;
-	}
+	.box select{width: 140px;}
 	
-	/* エラーメッセージの初期状態は非表示にする */
-	.hidden {
-	  display: none;
-	}
+	.button{
+		height:40px;
+		width:100px;
+}
 	
-	/* エラーメッセージの表示設定 */
-	#error-message {
-	  color: red;
-	}
 	</style>
 </head>
 <body>
@@ -81,8 +75,6 @@
 	
   <form th:action="@{/emp/insert}" th:object="${form}" th:method="post"> 
  
-	
-		
 		
 		<dl>
 			<dt>社員ID<label class="required"></label></dt>
@@ -132,13 +124,13 @@
 		<p id="error-message" class="hidden">※社員IDは既に存在しています。画面を閉じて再度お試しください。</p>
 				
 				<div style="text-align: right">
-					<span><input type="submit" value="登録">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="submit" value="更新">
+					<span><input type="submit" value="登録" class="button">
+					
 				</span>
 				</div>
 	<br/>
 				<div style="text-align: right">
-					<button type="button" onclick="history.back()">閉じる</button> <!--resetではなく戻る動作にする-->
+					<button type="button" class="button" onclick="history.back()">閉じる</button> <!--resetではなく戻る動作にする-->
 				</div>
 					
 					
