@@ -14,10 +14,15 @@ public interface EmployeeMapper {
 	List<Employee> findAll();
 
 	void add(Form form);
+<<<<<<< HEAD
 
 	//社員情報更新
 	void update(Form form);
 
 	List<Employee> iFindByCondition();
+=======
+	
+	List<Employee> iFindByCondition(Form form);
+>>>>>>> branch 'master' of https://github.com/RothschildsMa/Mipha.git
 
 }

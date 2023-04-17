@@ -70,12 +70,21 @@ public class MainController {
 	public String restart() {
 		return "team2/akimi";
 	}
+<<<<<<< HEAD
 
 	@GetMapping("/employee/search")
 	public String getEmployeesByCondition(Model model) {
 		List<Employee> employees = employeeService.findByCondition();
 		model.addAttribute("users", employees);
 		return "output";
+=======
+	
+	@RequestMapping(value = "/employee/search", method = RequestMethod.POST)
+	public String getEmployeesByCondition(Model model,Form form) {
+		List<Employee> employees = employeeService.findByCondition(form);
+		model.addAttribute("employeeList", employees);
+		return "team2/employInformationDisplay";
+>>>>>>> branch 'master' of https://github.com/RothschildsMa/Mipha.git
 	}
 
 }

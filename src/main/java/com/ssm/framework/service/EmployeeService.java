@@ -26,6 +26,7 @@ public class EmployeeService {
 	public void add(Form form) {
 		employeeMapper.add(form);
 	}
+<<<<<<< HEAD
 
 	//社員情報更新
 	public void update(Form form) {
@@ -34,6 +35,11 @@ public class EmployeeService {
 
 	public List<Employee> findByCondition() {
 		return employeeMapper.iFindByCondition();
+=======
+	
+	public List<Employee> findByCondition(Form form){
+		return employeeMapper.iFindByCondition(form);
+>>>>>>> branch 'master' of https://github.com/RothschildsMa/Mipha.git
 	}
 
 }
