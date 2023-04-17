@@ -13,11 +13,11 @@
 		<p class="p1">社員情報一覧</p>
 	</div>
 	
-	<form>
+	<form th:action="@{/employee/search}" th:object="${form}" th:method="post">
 		<div class="firstSelectRow_css">
 			<label for="member-id" class="label1">社员ID:</label>
 			<form method="get"> 
-			<input type="text" id="member-id" name="member-id" class="input1" ><br><br>
+			<input type="text" th:field="${employeeId}" id="member-id" name="member-id" class="input1" ><br><br>
 			</form>
 			<label for="department" class="label2">所属部门:</label>
 			<select id="department" name="department" class="select1">
@@ -40,7 +40,8 @@
 		<input type="submit" value="删除" class="delete_css">
 	</form>
 	
-	<div class="table-container">
+	
+	<div class="table-container" th:if="${employeeList}">
 	<table>
 		<tr class="trFirst_css">
 			<th>选择</th>

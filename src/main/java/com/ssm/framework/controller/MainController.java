@@ -38,7 +38,8 @@ public class MainController {
 	public String showList2(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
-		return "team2/employInformationDisplay";
+		model.addAttribute("form", new Form());
+		return "team2/employInformationDisplay2";
 	}
 	
 	
@@ -69,7 +70,7 @@ public class MainController {
 	public String getEmployeesByCondition(Model model,Form form) {
 		List<Employee> employees = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", employees);
-		return "team2/employInformationDisplay";
+		return "team2/employInformationDisplay2";
 	}
 
 }
