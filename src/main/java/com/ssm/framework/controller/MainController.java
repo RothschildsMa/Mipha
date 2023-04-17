@@ -20,8 +20,6 @@ public class MainController {
 	private EmployeeService employeeService;
 
 	//DB取得&出力サンプル
-	
-	
 	@GetMapping(value = "/employee/list")
 	public String showList(Model model) {
 		List<Employee> empList = employeeService.findAll();
