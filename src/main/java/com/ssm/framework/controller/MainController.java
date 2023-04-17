@@ -40,7 +40,7 @@ public class MainController {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		model.addAttribute("form", new Form());
-		return "team2/employInformationDisplay2";
+		return "team2/emp2";
 	}
 
 	@GetMapping(value = "/emp/add")
