@@ -41,6 +41,7 @@ public class MainController {
 		return "team2/employInformationDisplay";
 	}
 	
+	
 	@GetMapping(value = "/emp/add")
     public String displayAdd(Model model) {
         model.addAttribute("form", new Form());
