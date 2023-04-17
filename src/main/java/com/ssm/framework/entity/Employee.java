@@ -33,7 +33,7 @@ public class Employee implements Serializable{
 	private int employeeAge;
 	
 	//所属ID
-	private String employeeDepartmentId;
+	private String employeeDepatmentId;
 	
 	//電話番号
 	private String employeePhoneNumber;

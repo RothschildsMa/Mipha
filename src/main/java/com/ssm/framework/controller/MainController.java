@@ -50,9 +50,9 @@ public class MainController {
 	
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
     public String addToTable(Form form) {
-        // ユーザー情報の登録
-		employeeService.add(form);
-        return "redirect:/employee/list";
+        // 社員情報の登録
+		employeeService.add(form); //情報挿入
+        return "redirect:/employee/list"; //リダイレクト
     }
 
 	@GetMapping("login")
