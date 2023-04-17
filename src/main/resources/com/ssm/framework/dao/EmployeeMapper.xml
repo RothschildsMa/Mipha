@@ -30,7 +30,8 @@
     <select id="iFindByCondition" resultType="com.ssm.framework.entity.Employee">
         SELECT * FROM T_employee
 		  <where>
-		    <if test="employeeId != null">
+		  DEL_FLG = 0
+		    <if test="employeeId != null and employeeId != ''">
 		      AND EMPLOYEE_ID = #{employeeId}
 		    </if>
 		  </where>
