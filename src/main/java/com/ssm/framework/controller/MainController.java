@@ -67,6 +67,7 @@ public class MainController {
 		return "team1/Login";
 	}
 
+	
 	@GetMapping("akimi")
 	public String restart() {
 		return "team2/akimi";
