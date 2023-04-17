@@ -28,7 +28,7 @@ public class MainController {
 	}
 
 
-	@GetMapping(value = "/employee/list1")
+	@GetMapping("employee/list1")
 	public String showList1(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
