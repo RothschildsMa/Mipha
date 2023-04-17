@@ -65,11 +65,11 @@ public class MainController {
 		return "team2/akimi";
 	}
 	
-	@GetMapping("/employee/search")
-	public String getEmployeesByCondition(Model model) {
-		List<Employee> employees = employeeService.findByCondition();
-		model.addAttribute("users", employees);
-		return "output";
+	@RequestMapping(value = "/employee/search", method = RequestMethod.POST)
+	public String getEmployeesByCondition(Model model,Form form) {
+		List<Employee> employees = employeeService.findByCondition(form);
+		model.addAttribute("employeeList", employees);
+		return "team2/employInformationDisplay";
 	}
 
 }

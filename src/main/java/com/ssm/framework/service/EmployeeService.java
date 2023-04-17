@@ -26,8 +26,8 @@ public class EmployeeService {
 		employeeMapper.add(form);
 	}
 	
-	public List<Employee> findByCondition(){
-		return employeeMapper.iFindByCondition();
+	public List<Employee> findByCondition(Form form){
+		return employeeMapper.iFindByCondition(form);
 	}
 
 }
