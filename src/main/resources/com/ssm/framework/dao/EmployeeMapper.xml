@@ -9,6 +9,23 @@
     <select id="findAll" resultType="com.ssm.framework.entity.Employee">
         SELECT * FROM T_employee WHERE DEL_FLG = 0
     </select>
+    
+    <select id="linkId" resultType="com.ssm.framework.entity.Employee">
+        SELECT * FROM T_employee WHERE EMPLOYEE_ID = #{employeeId} AND DEL_FLG = 0
+    </select>
+    
+    <!--条件検索-->
+    <select id="iFindByCondition" resultType="com.ssm.framework.entity.Employee">
+        SELECT * FROM T_employee
+		  <where>
+		  DEL_FLG = 0
+		    <if test="employeeId != null and employeeId != ''">
+		      AND EMPLOYEE_ID = #{employeeId}
+		    </if>
+		  </where>
+    </select>
+    
+    
      <!-- 登録 -->
 	<insert id="add">
 	  INSERT INTO T_employee (EMPLOYEE_ID, PASSWORD, JOIN_DATE, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA, 
@@ -26,14 +43,5 @@
 	  WHERE EMPLOYEE_ID = #{employeeId}
 	</update>
 	
-	 <!--条件检索-->
-    <select id="iFindByCondition" resultType="com.ssm.framework.entity.Employee">
-        SELECT * FROM T_employee
-		  <where>
-		  DEL_FLG = 0
-		    <if test="employeeId != null and employeeId != ''">
-		      AND EMPLOYEE_ID = #{employeeId}
-		    </if>
-		  </where>
-    </select>
+	
 </mapper>

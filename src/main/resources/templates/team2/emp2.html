@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link rel="stylesheet" type="text/css" href="/employInformationDisplay.css">
-	<title>社员信息管理系统</title>
+	<title>勤怠管理システム</title>
 </head>
 <body>
 	<div class="header">
@@ -12,6 +12,10 @@
 	<div class="p_css">
 		<p class="p1">社員情報一覧</p>
 	</div>
+	
+	<form th:action="@{/emp/add}">
+		<button id="loginBtn" class="loginBtu_css">登録</button>
+	</form>
 
 	<form th:action="@{/employee/search}" th:object="${form}" th:method="post">
 		<div class="firstSelectRow_css">
@@ -25,7 +29,6 @@
 				<option value="005">第ニ開発部</option>
 				<option value="003">営業部</option>
 			</select><br><br>
-			<button  id="loginBtn" class="loginBtu_css">登録</button>
 			
 			<button id="searchBtn" type="submit"  class="searchBtu_css">検索</button>
 			
