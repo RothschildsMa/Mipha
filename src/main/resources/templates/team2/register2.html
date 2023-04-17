@@ -80,7 +80,7 @@
 	<h3>社員情報登録画面</h3>
 	{{if .Id}}
   <!--ユーザ情報の更新-->
-  <form action="@{/emp/update}" method="post">
+  <form action="@{/emp/update}" th:object="${form}" method="post">
   {{else}}
   <!--ユーザ情報の登録-->
   <form th:action="@{/emp/insert}" th:object="${form}" th:method="post"> 
