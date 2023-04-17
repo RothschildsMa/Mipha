@@ -75,14 +75,14 @@
   /* background-color: #2ecc71; */
   height: 30px;
 }
-.login_css{
+.loginBtu_css{
 right: 100px;
 position: absolute;
 font-size: large;
 background-color:blue;
 color: aliceblue;
 }
-.search_css{
+.searchBtu_css{
   right: 30px;
   position: absolute;
   font-size: large;

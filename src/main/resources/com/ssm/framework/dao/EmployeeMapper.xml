@@ -17,5 +17,17 @@
 	  VALUES (#{employeeId},#{password}, #{employeeName}, #{employeeNameKana},
 	  #{employeeAge}, #{employeePhoneNumber}, #{employeeMail})
 	</insert>
-    
+	
+	 <!--条件检索-->
+    <select id="findByCondition" resultType="com.ssm.framework.entity.Employee">
+        SELECT * FROM T_employee
+		  <where>
+		    <if test="employeeId != null">
+		      and employeeId = #{employeeId}
+		    </if>
+		    <if test="employeeName != null and employeeName != ''">
+		      and username = #{employeeName}
+		    </if>
+		  </where>
+    </select>
 </mapper>

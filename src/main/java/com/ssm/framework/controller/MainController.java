@@ -34,6 +34,13 @@ public class MainController {
 		return "team2/akimi";
 	}
 	
+	@GetMapping(value = "/employee/list2")
+	public String showList2(Model model) {
+		List<Employee> empList = employeeService.findAll();
+		model.addAttribute("employeeList", empList);
+		return "team2/employInformationDisplay";
+	}
+	
 	
 	@GetMapping(value = "/emp/add")
     public String displayAdd(Model model) {
@@ -56,6 +63,13 @@ public class MainController {
 	@GetMapping("akimi")
 	public String restart() {
 		return "team2/akimi";
+	}
+	
+	@GetMapping("/employee/search")
+	public String getEmployeesByCondition(Model model) {
+		List<Employee> employees = employeeService.findByCondition();
+		model.addAttribute("users", employees);
+		return "output";
 	}
 
 }
