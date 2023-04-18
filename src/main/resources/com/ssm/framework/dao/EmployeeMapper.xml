@@ -23,7 +23,7 @@
 		      AND EMPLOYEE_ID = #{employeeId}
 		    </if>
 		    <if test="employeeDepatmentId != null and employeeDepatmentId != ''">
-            AND DEPARTMENT_ID = #{employeeDepatmentId}
+            AND EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}
         </if>
 		    
 		    
