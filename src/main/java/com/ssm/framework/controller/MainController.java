@@ -104,7 +104,7 @@ public class MainController {
 	@PostMapping("/deleteEmployees")
 	public String deleteEmployees(@RequestParam("employeeIds") String[] employeeIds) {
 		for (String employeeId : employeeIds) {
-			employeeMapper.updateEmployeeDeletedFlag(employeeId);
+			employeeService.updateDeletedFlag(employeeId);
 		}
 		return "redirect:/emp/info";
 	}
