@@ -8,9 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ssm.framework.dao.EmployeeMapper;
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.form.UpdateForm;
 import com.ssm.framework.service.EmployeeService;
@@ -33,7 +36,7 @@ public class MainController {
 	public String loginView() {
 		return "team1/Login";
 	}
-	
+
 	//社員情報一覧画面
 	@GetMapping(value = "/emp/info")
 	public String employeeInformation(Model model) {
@@ -57,6 +60,7 @@ public class MainController {
 		employeeService.add(updateForm); //情報挿入
 		return "redirect:/emp/info"; //リダイレクト
 	}
+
 	
 	
 	@GetMapping("/emp/{id}/update")
@@ -96,19 +100,27 @@ public class MainController {
 		return "team2/emp2";
 
 	}
-	
+
+	//削除フラグ用
+	@PostMapping("/deleteEmployees")
+	public String deleteEmployees(@RequestParam("employeeIds") String[] employeeIds) {
+		for (String employeeId : employeeIds) {
+			EmployeeMapper.updateEmployeeDeletedFlag(employeeId);
+		}
+		return "redirect:/emp/info";
+	}
+
 	@GetMapping(value = "/employee/view")
 	public String showList2(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		return "team2/employInformationDisplay";
 	}
-	
+
 	@GetMapping(value = "/employee/employInformationDisplay")
 	public String showList2(Model model, UpdateForm form) {
 		List<Employee> empList = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", empList);
 		return "team2/employInformationDisplay";
 	}
-
 }
