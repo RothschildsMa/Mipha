@@ -14,6 +14,8 @@ public interface EmployeeMapper {
 
 	//社員情報全て検索
 	List<Employee> findAll();
+	
+	Employee linkId(String employeeId);
 
 	void add(UpdateForm form);
 
