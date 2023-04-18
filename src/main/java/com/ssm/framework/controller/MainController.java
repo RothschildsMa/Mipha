@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.form.Form;
@@ -31,7 +33,7 @@ public class MainController {
 	public String loginView() {
 		return "team1/Login";
 	}
-	
+
 	//社員情報一覧画面
 	@GetMapping(value = "/emp/info")
 	public String employeeInformation(Model model) {
@@ -55,11 +57,6 @@ public class MainController {
 		employeeService.add(form); //情報挿入
 		return "redirect:/emp/info"; //リダイレクト
 	}
-	
-	
-	
-	
-	
 
 	@RequestMapping(value = "/emp/update", method = RequestMethod.POST)
 	public String updateToTabel(Form form) {
@@ -77,5 +74,13 @@ public class MainController {
 
 	}
 
+	//削除フラグ用
+	@PostMapping("/deleteEmployees")
+	public String deleteEmployees(@RequestParam("employeeIds") String[] employeeIds) {
+		for (String employeeId : employeeIds) {
+			employeeMapper.updateEmployeeDeletedFlag(employeeId);
+		}
+		return "redirect:/employeeList";
+	}
 
 }

@@ -5,6 +5,7 @@
 	<title>勤怠管理システム</title>
 </head>
 <body>
+	<script src="../../static/js/deleteEmployee.js"></script>
 	<div class="header">
 		<h1 class="header_css">株式会社ＸＸＸ</h1>    
 		<button class="logout_css">ログアウト</button>
@@ -39,9 +40,14 @@
 			<p class="p2">~</p>
 			<input type="date" id="end-date" name="end-date"class="timeEnd"><br><br>
 		</div>
+		</form>
 		
-		<input type="submit" value="削除" class="delete_css">
-	</form>
+		<form th:action="@{/deleteEmployees}" method="post" id="deleteForm">
+		  <input type="hidden" name="employeeIds" id="employeeIds"/>
+		  <button type="submit" class="btn btn-danger" onclick="prepareEmployeeIds()">削除</button>
+		</form>
+		<!--<input type="submit" value="削除" class="delete_css">-->
+	
 	
 	<div class="table-container" th:if="${employeeList}">
 	<table>
