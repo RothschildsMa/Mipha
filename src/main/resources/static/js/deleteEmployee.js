@@ -1,7 +1,12 @@
-function prepareEmployeeIds() {
-  var checkedEmployeeIds = [];
+ function deleteEmployees() {
+  var employeeIds = [];
   $("input[name='employeeCheckbox']:checked").each(function () {
-      checkedEmployeeIds.push($(this).val());
+    employeeIds.push($(this).val());
   });
-  $("#employeeIds").val(checkedEmployeeIds.join(','));
+  if (employeeIds.length > 0) {
+    $("#employeeIds").val(employeeIds.join(','));
+    $("#deleteForm").submit();
+  } else {
+    alert("削除する社員を選択してください。");
+  }
 }

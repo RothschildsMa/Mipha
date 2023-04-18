@@ -14,6 +14,8 @@ public interface EmployeeMapper {
 
 	//社員情報全て検索
 	List<Employee> findAll();
+	
+	Employee linkId(String employeeId);
 
 	void add(UpdateForm form);
 
@@ -22,7 +24,7 @@ public interface EmployeeMapper {
 	List<Employee> iFindByCondition(UpdateForm form);
 
 	//削除フラグ用
-	@Update("UPDATE T_employee SET DEL_FLG = 1 WHERE ID = #{employeeId}")
+	@Update("UPDATE T_employee SET DEL_FLG = 1 WHERE EMPLOYEE_ID = #{employeeId}")
 	void updateEmployeeDeletedFlag(@Param("employeeId") String employeeId);
 
 }

@@ -22,6 +22,10 @@ public class EmployeeService {
 		return employeeMapper.findAll();
 
 	}
+	
+	public Employee linkId(String employeeId) {
+		return employeeMapper.linkId(employeeId);
+	}
 
 	//社員情報登録
 	public void add(UpdateForm form) {
@@ -31,6 +35,11 @@ public class EmployeeService {
 	//社員情報更新
 	public void update(UpdateForm form) {
 		employeeMapper.update(form);
+	}
+
+	//削除フラグ
+	public void updateDeletedFlag(String employeeId) {
+		employeeMapper.updateEmployeeDeletedFlag(employeeId);
 	}
 
 	public List<Employee> findByCondition(UpdateForm form) {

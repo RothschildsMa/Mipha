@@ -46,11 +46,15 @@
 	<!-- 更新 -->
 	<update id="update">
 	  UPDATE T_employee SET
-	  JOIN_DATE = #{{joinDate}, EMPLOYEE_NAME = #{employeeName}, EMPLOYEE_NAMEKANA = #{employeeNameKana}, 
+	  EMPLOYEE_NAME = #{employeeName}, EMPLOYEE_NAMEKANA = #{employeeNameKana}, 
 	  EMPLOYEE_GENDERID = #{employeeGenderId}, EMPLOYEE_AGE = #{employeeAge}, EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}, 
-	  EMPLOYEE_PHONENUMBER =, #{employeePhoneNumber}, EMPLOYEE_MAIL = #{employeeMail}
+	  EMPLOYEE_PHONENUMBER = #{employeePhoneNumber}, EMPLOYEE_MAIL = #{employeeMail}
 	  WHERE EMPLOYEE_ID = #{employeeId}
 	</update>
 	
-	
+	<!-- 削除 -->
+	<update id="deleteEmployees" parameterType="java.util.List">
+    UPDATE T_employee SET DEL_FLG = 1 WHERE EMPLOYEE_ID = #employeeId}
+  </update>
+  
 </mapper>
