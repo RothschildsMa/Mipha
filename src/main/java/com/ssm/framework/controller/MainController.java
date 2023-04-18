@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssm.framework.entity.Employee;
+import com.ssm.framework.form.LoginForm;
 import com.ssm.framework.form.UpdateForm;
 import com.ssm.framework.service.EmployeeService;
 import com.ssm.framework.service.LoginService;
@@ -24,13 +25,30 @@ public class MainController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
 	private LoginService loginService;
-	    
-	@GetMapping(value = "/team1/Login")
-	public String displayList(Model model) {
-		List<Employee> empList = loginService.findAll();
-		model.addAttribute("employeeList", empList);
-		return "/team1/Login";
+	
+	@GetMapping("login")
+	public String loginView(Model model) {
+		//LoginForm loginForm = new LoginForm();
+		
+		model.addAttribute("loginForm",new LoginForm());
+		return"team1/Login";
+		
+	}
+	
+	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
+	public String displayList(LoginForm loginForm,Model model) {
+		
+		Employee emp = loginService.checkId(loginForm);
+		if(emp == null) {
+			return "redirect:/login";
+		}
+		else {
+			return "redirect:/emp/info";
+		}
+	
+		
 	}
 	
 

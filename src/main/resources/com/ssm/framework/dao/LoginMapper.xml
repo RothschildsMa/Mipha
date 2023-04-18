@@ -3,7 +3,7 @@
 
 <mapper namespace="com.ssm.framework.dao.LoginMapper">
 
-    <select id="getPassword" resultType="com.ssm.framework.entity.Employee" >
+    <select id="checkId" resultType="com.ssm.framework.entity.Employee" >
         SELECT * FROM T_employee WHERE EMPLOYEE_ID = #{employeeId} AND DEL_FLG = 0 
         AND PASSWORD = #{password}
     </select>
