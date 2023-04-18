@@ -37,7 +37,7 @@ public class MainController {
 	public String employeeInformation(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
-		model.addAttribute("form", new Form());
+		//model.addAttribute("form", new Form());
 		return "team2/emp2";
 	}
 
