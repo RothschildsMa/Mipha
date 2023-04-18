@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class Form implements Serializable {
+public class UpdateForm implements Serializable {
 
 	//社員ID
 	private String employeeId;

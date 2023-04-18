@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssm.framework.dao.EmployeeMapper;
 import com.ssm.framework.entity.Employee;
-import com.ssm.framework.form.Form;
+import com.ssm.framework.form.UpdateForm;
 
 @Service
 public class EmployeeService {
@@ -24,16 +24,16 @@ public class EmployeeService {
 	}
 
 	//社員情報登録
-	public void add(Form form) {
+	public void add(UpdateForm form) {
 		employeeMapper.add(form);
 	}
 
 	//社員情報更新
-	public void update(Form form) {
+	public void update(UpdateForm form) {
 		employeeMapper.update(form);
 	}
 
-	public List<Employee> findByCondition(Form form) {
+	public List<Employee> findByCondition(UpdateForm form) {
 		return employeeMapper.iFindByCondition(form);
 
 	}

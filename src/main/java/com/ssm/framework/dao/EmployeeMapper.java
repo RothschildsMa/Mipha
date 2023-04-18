@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssm.framework.entity.Employee;
-import com.ssm.framework.form.Form;
+import com.ssm.framework.form.UpdateForm;
 
 @Mapper
 public interface EmployeeMapper {
@@ -13,11 +13,11 @@ public interface EmployeeMapper {
 	//社員情報全て検索
 	List<Employee> findAll();
 
-	void add(Form form);
+	void add(UpdateForm form);
 
-	void update(Form form);
+	void update(UpdateForm form);
 
-	List<Employee> iFindByCondition(Form form);
+	List<Employee> iFindByCondition(UpdateForm form);
 	
 	
 	
