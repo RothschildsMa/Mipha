@@ -23,6 +23,8 @@ public interface EmployeeMapper {
 
 	//削除フラグ用
 	@Update("UPDATE T_employee SET DEL_FLG = 1 WHERE ID = #{employeeId}")
-	void updateEmployeeDeletedFlag(@Param("employeeId") String employeeId);
+	static void updateEmployeeDeletedFlag(@Param("employeeId") String employeeId) {
+
+	}
 
 }
