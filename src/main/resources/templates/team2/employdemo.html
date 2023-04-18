@@ -50,7 +50,8 @@
     </tr>
   </thead>
   <tbody>
-  
+   
+   	</tr>
 		
 		<tr th:each="employee : ${employeeList}" th:object="${employee}">
 		     
@@ -62,7 +63,7 @@
              <td th:text="*{employeeNameKana}"></td>
              <td th:text="*{employeeGenderId}"></td>
              <td th:text="*{employeeAge}"></td>
-             <td th:text="*{employeeDepatmentId}"></td>
+             <td th:text="*{employeeDepartmentId}"></td>
              <td th:text="*{employeePhoneNumber}"></td>
              <td th:text="*{employeeMail}"></td>
 

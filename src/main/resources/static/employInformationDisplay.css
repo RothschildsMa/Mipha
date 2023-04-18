@@ -99,6 +99,7 @@ table{
 }
 .trFirst_css{
 background-color: deepskyblue;
+line-height: 1.5em;
 }
 th{
   border: 1px solid black;
