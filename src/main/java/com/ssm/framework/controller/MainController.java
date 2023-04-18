@@ -76,6 +76,19 @@ public class MainController {
 		return "team2/emp2";
 
 	}
-
+	
+	@GetMapping(value = "/employee/view")
+	public String showList2(Model model) {
+		List<Employee> empList = employeeService.findAll();
+		model.addAttribute("employeeList", empList);
+		return "team2/employInformationDisplay";
+	}
+	
+	@GetMapping(value = "/employee/employInformationDisplay")
+	public String showList2(Model model, UpdateForm form) {
+		List<Employee> empList = employeeService.findByCondition(form);
+		model.addAttribute("employeeList", empList);
+		return "team2/employInformationDisplay";
+	}
 
 }
