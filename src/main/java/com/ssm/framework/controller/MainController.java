@@ -14,12 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.form.UpdateForm;
 import com.ssm.framework.service.EmployeeService;
+import com.ssm.framework.service.LoginService;
 
 @Controller
 public class MainController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	private LoginService loginService;
+	    
+	@GetMapping(value = "/team1/Login")
+	public String displayList(Model model) {
+		List<Employee> empList = loginService.findAll();
+		model.addAttribute("employeeList", empList);
+		return "/team1/Login";
+	}
+	
 
 	//debugリスト表示
 	@GetMapping(value = "/employee/list")
@@ -29,10 +39,7 @@ public class MainController {
 		return "output";
 	}
 
-	@GetMapping("login")
-	public String loginView() {
-		return "team1/Login";
-	}
+	
 
 	//社員情報一覧画面
 	@GetMapping(value = "/emp/info")
