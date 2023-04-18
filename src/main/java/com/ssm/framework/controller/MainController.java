@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ssm.framework.dao.EmployeeMapper;
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.form.UpdateForm;
 import com.ssm.framework.service.EmployeeService;
@@ -105,7 +104,7 @@ public class MainController {
 	@PostMapping("/deleteEmployees")
 	public String deleteEmployees(@RequestParam("employeeIds") String[] employeeIds) {
 		for (String employeeId : employeeIds) {
-			EmployeeMapper.updateEmployeeDeletedFlag(employeeId);
+			employeeMapper.updateEmployeeDeletedFlag(employeeId);
 		}
 		return "redirect:/emp/info";
 	}
