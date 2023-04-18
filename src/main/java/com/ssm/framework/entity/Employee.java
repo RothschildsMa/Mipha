@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class Employee implements Serializable{
 	
-	//自動採番ID
+	//自動採番IDSerializable
 	private Long id;
 	
 	//社員ID
