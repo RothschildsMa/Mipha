@@ -22,6 +22,10 @@ public class EmployeeService {
 		return employeeMapper.findAll();
 
 	}
+	
+	public Employee linkId(String employeeId) {
+		return employeeMapper.linkId(employeeId);
+	}
 
 	//社員情報登録
 	public void add(UpdateForm form) {

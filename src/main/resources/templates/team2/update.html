@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>社員情報登録画面</title>
+<title>社員情報更新画面</title>
 <style>
 	.登録フォーム {
         font-family: arial;
@@ -71,11 +71,10 @@
 <body>
 
 	<div class="登録フォーム">
-	<h3>社員情報登録画面</h3>
+	<h3>社員情報更新画面</h3>
 	
-  <form th:action="@{/emp/insert}" th:object="${form}" th:method="post"> 
- 
-		
+ <form th:action="@{/emp/update}" th:object="${updateForm}" th:method="post">
+
 		<dl>
 			<dt>社員ID<label class="required"></label></dt>
 			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required/></input></dd>
@@ -124,7 +123,7 @@
 		<p id="error-message" class="hidden">※社員IDは既に存在しています。画面を閉じて再度お試しください。</p>
 				
 				<div style="text-align: right">
-					<span><input type="submit" value="登録" class="button">
+					<span><input type="submit" value="更新" class="button">
 					
 				</span>
 				</div>

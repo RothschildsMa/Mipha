@@ -17,7 +17,7 @@
 		<button id="loginBtn" class="loginBtu_css">登録</button>
 	</form>
 
-	<form th:action="@{/employee/search}" th:object="${form}" th:method="post">
+	<form th:action="@{/employee/search}" th:object="${updateForm}" th:method="post">
 		<div class="firstSelectRow_css">
 			<label for="member-id" class="label1">社員ID:</label>
 			<form  method="get"> 
@@ -60,9 +60,8 @@
 		
 		
 		<tr th:each="employee : ${employeeList}" th:object="${employee}">
-		     
              <td><input type="checkbox"></td>
-             <td><a th:href="@{/updateLink}" th:text="*{employeeId}"></a></td>
+             <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
              <td th:text="*{employeeNameKana}"></td>
