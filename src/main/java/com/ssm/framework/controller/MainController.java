@@ -88,7 +88,7 @@ public class MainController {
 	@RequestMapping(value = "/emp/update", method = RequestMethod.POST)
 	public String updateToTabel(@ModelAttribute UpdateForm updateForm) {
 		// 社員情報の更新
-		employeeService.update(updateForm); //情報挿入
+		employeeService.update(updateForm); //情報更新
 		return "redirect:/emp/info"; //リダイレクト
 	}
 
