@@ -22,9 +22,7 @@ public interface EmployeeMapper {
 	List<Employee> iFindByCondition(UpdateForm form);
 
 	//削除フラグ用
-	@Update("UPDATE T_employee SET DEL_FLG = 1 WHERE ID = #{employeeId}")
-	static void updateEmployeeDeletedFlag(@Param("employeeId") String employeeId) {
-
-	}
+	@Update("UPDATE T_employee SET DEL_FLG = 1 WHERE EMPLOYEE_ID = #{employeeId}")
+	void updateEmployeeDeletedFlag(@Param("employeeId") String employeeId);
 
 }

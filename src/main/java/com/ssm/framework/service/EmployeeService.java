@@ -33,6 +33,11 @@ public class EmployeeService {
 		employeeMapper.update(form);
 	}
 
+	//削除フラグ
+	public void updateDeletedFlag(String employeeId) {
+		employeeMapper.updateEmployeeDeletedFlag(employeeId);
+	}
+
 	public List<Employee> findByCondition(UpdateForm form) {
 		return employeeMapper.iFindByCondition(form);
 

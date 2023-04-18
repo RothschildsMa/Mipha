@@ -43,8 +43,8 @@
 		</form>
 		
 		<form th:action="@{/deleteEmployees}" method="post" id="deleteForm">
-		  <input type="hidden" name="employeeIds" id="employeeIds"/>
-		  <button type="submit" class="btn btn-danger" onclick="prepareEmployeeIds()">削除</button>
+ 			 <input type="hidden" name="employeeIds" id="employeeIds"/>
+			<button type="button" class="btn btn-danger delete_css" onclick="deleteEmployees()">削除</button>
 		</form>
 		<!--<input type="submit" value="削除" class="delete_css">-->
 	
@@ -67,7 +67,7 @@
 		
 		<tr th:each="employee : ${employeeList}" th:object="${employee}">
 		     
-             <td><input type="checkbox"></td>
+             <td><input type="checkbox" name="employeeIds" th:value="${employeeId}"></td>
              <td><a th:href="@{/updateLink}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
