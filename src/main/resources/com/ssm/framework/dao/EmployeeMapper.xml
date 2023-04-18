@@ -54,7 +54,7 @@
 	
 	<!-- 削除 -->
 	<update id="deleteEmployees" parameterType="java.util.List">
-    UPDATE T_employee SET DEL_FLG = 1 WHERE EMPLOYEE_ID = #employeeId}
+    UPDATE T_employee SET DEL_FLG = 1 WHERE EMPLOYEE_ID = #{employeeId}
   </update>
   
 </mapper>
