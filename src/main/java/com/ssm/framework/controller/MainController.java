@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,10 +71,9 @@ public class MainController {
 		
         Employee emp = employeeService.linkId(id);
         UpdateForm updateForm = new UpdateForm();
+
         updateForm.setEmployeeId(emp.getEmployeeId());
-        updateForm.setPassword(emp.getPassword());
-        
-        updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
+       // updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
         
         updateForm.setEmployeeName(emp.getEmployeeName());
         updateForm.setEmployeeNameKana(emp.getEmployeeNameKana());
@@ -86,10 +86,10 @@ public class MainController {
     }
 
 	@RequestMapping(value = "/emp/update", method = RequestMethod.POST)
-	public String updateToTabel(UpdateForm updateForm) {
+	public String updateToTabel(@ModelAttribute UpdateForm updateForm) {
 		// 社員情報の更新
 		employeeService.update(updateForm); //情報挿入
-		return "redirect:/employee/list"; //リダイレクト
+		return "redirect:/emp/info"; //リダイレクト
 	}
 
 	//条件検索 完成(社員ID) 未完成(所属ID、入社年月日範囲チェック)
