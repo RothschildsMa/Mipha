@@ -84,6 +84,7 @@ public class MainController {
 		return "team2/employInformationDisplay";
 	}
 	
+	
 	@GetMapping(value = "/employee/employInformationDisplay")
 	public String showList2(Model model, UpdateForm form) {
 		List<Employee> empList = employeeService.findByCondition(form);
