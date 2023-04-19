@@ -13,24 +13,30 @@
 		<p class="p1">社員情報一覧</p>
 	</div>
 	
+	<form th:action="@{/emp/add}">
+		<button id="loginBtn" class="loginBtu_css">登録</button>
+	</form>
+	
 	<form th:action="@{/employee/employInformationDisplay}" method="get">
 		<div class="firstSelectRow_css">
 			<label for="member-id" class="label1">社员ID:</label>
-			<input type="text" name="employeeId" class="input1"><br><br>
+			<input type="text" name="employeeId" class="input1" th:value="${employeeInput}"><br><br>
 			<label for="department" class="label2">所属部门:</label>
-			<select id="department" name="employeeDepatmentId" class="select1">
+			<select id="department" name="employeeDepatmentId" class="select1" th:value="${employeeDepatmentInput}">
+				<option value="001">所属不明</option>
+				<option value="002">管理部</option>
+				<option value="003">営業部</option>
 				<option value="004">第一開発部</option>
 				<option value="005">第ニ開発部</option>
-				<option value="003">営業部</option>
+				<option value="006">人事部</option>
 			</select><br><br>
-			<button  id="loginBtn"  class="loginBtu_css">登録</button>
 			<button id="searchBtn" type="submit" class="searchBtu_css">検索</button>
 		</div>
 		<div class="twoSelectRow_css">
 			<label for="start-date" class="label3">入社年月日:</label>
-			<input type="date" id="start-date" name="start-date"class="timeStart"><br><br>
+			<input type="date" id="start-date" name="startDate"class="timeStart" th:value="${startDateInput}"><br><br>
 			<p class="p2">~</p>
-			<input type="date" id="end-date" name="end-date"class="timeEnd"><br><br>
+			<input type="date" id="end-date" name="endDate"class="timeEnd" th:value="${endDateInput}"><br><br>
 		</div>
 		
 		<input type="submit" value="删除" class="delete_css">
@@ -38,10 +44,10 @@
 	
 	<div class="table-container">
 	<table>
+	<tbody>
 		<tr class="trFirst_css">
 			<th>选择</th>
 			<th>社員ID</th>
-			.
 			<th>入社年月日</th>
 			<th>氏名</th>
 			<th>カタカナ</th>
@@ -53,8 +59,8 @@
 		</tr>
 		
 		<tr th:each="employee : ${employeeList}" th:object="${employee}">
-		     <td><input type="checkbox"></td>
-             <td><a th:href="@{/updateLink}" th:text="*{employeeId}"></a></td>
+		     <td class = 'checkBox_css'><input type="checkbox"></td>
+             <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
              <td th:text="*{employeeNameKana}"></td>
@@ -65,6 +71,7 @@
              <td th:text="*{employeeMail}"></td>
 
            </tr>
+           </tbody>
 	</table>
 	<div>
 </body>

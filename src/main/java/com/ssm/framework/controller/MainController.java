@@ -139,7 +139,23 @@ public class MainController {
 	}
 
 	@GetMapping(value = "/employee/employInformationDisplay")
-	public String showList2(Model model, UpdateForm form) {
+	public String showList2(Model model, UpdateForm form,
+			@RequestParam("employeeId") String employeeInput,
+			@RequestParam("employeeDepatmentId") String employeeDepatmentInput
+			,@RequestParam("startDate") String startDateInput,
+			@RequestParam("endDate") String endDateInput) {
+		String strDt = form.getStartDate();
+		String endDt = form.getEndDate();
+		if(strDt != null && strDt != null) {
+			form.setStartDate(strDt);
+		}
+		if(endDt != null && endDt != null) {
+			form.setEndDate(endDt);
+		}
+		model.addAttribute("employeeInput", employeeInput);
+		model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
+		model.addAttribute("startDateInput", startDateInput);
+		model.addAttribute("endDateInput", endDateInput);
 		List<Employee> empList = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", empList);
 		return "team2/employInformationDisplay";

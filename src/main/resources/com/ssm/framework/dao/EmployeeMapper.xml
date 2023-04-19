@@ -24,13 +24,18 @@
 		    </if>
 		    <if test="employeeDepatmentId != null and employeeDepatmentId != ''">
             AND EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}
-        </if>
-		    
-		    
-		    
-		    
-		    
-		    
+        	</if>
+        	<if test="startDate!=null and startDate!=''">
+
+                and JOIN_DATE &gt;= #{startDate}
+
+            </if>
+
+            <if test="endDate !=null and endDate !=''">
+
+                and JOIN_DATE &lt;= #{endDate}
+
+            </if>
 		  </where>
     </select>
     
