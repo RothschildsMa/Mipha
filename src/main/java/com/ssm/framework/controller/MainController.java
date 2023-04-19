@@ -27,30 +27,27 @@ public class MainController {
 	private EmployeeService employeeService;
 	@Autowired
 	private LoginService loginService;
-	
+
 	@GetMapping("login")
 	public String loginView(Model model) {
 		//LoginForm loginForm = new LoginForm();
-		
-		model.addAttribute("loginForm",new LoginForm());
-		return"team1/Login";
-		
+
+		model.addAttribute("loginForm", new LoginForm());
+		return "team1/Login";
+
 	}
-	
+
 	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
 	public String check(LoginForm loginForm,Model model) {
-		
+
 		Employee emp = loginService.checkId(loginForm);
-		if(emp == null) {
+		if (emp == null) {
 			return "redirect:/login";
-		}
-		else {
+		} else {
 			return "redirect:/emp/info";
 		}
-	
-		
+
 	}
-	
 
 	//debugリスト表示
 	@GetMapping(value = "/employee/list")
@@ -59,8 +56,6 @@ public class MainController {
 		model.addAttribute("employeeList", empList);
 		return "output";
 	}
-
-	
 
 	//社員情報一覧画面
 	@GetMapping(value = "/emp/info")
@@ -86,9 +81,8 @@ public class MainController {
 		return "redirect:/emp/info"; //リダイレクト
 	}
 
-	
-	
 	@GetMapping("/emp/{id}/update")
+
     public String updateView(@PathVariable String id, Model model) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -96,18 +90,19 @@ public class MainController {
         Employee emp = employeeService.linkId(id);
         UpdateForm updateForm = new UpdateForm();
 
-        updateForm.setEmployeeId(emp.getEmployeeId());
-       // updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
-        
-        updateForm.setEmployeeName(emp.getEmployeeName());
-        updateForm.setEmployeeNameKana(emp.getEmployeeNameKana());
-        updateForm.setEmployeeGenderId(emp.getEmployeeGenderId());
-        updateForm.setEmployeeAge(emp.getEmployeeAge());
-        updateForm.setEmployeePhoneNumber(emp.getEmployeePhoneNumber());
-        updateForm.setEmployeeMail(emp.getEmployeeMail());
-        model.addAttribute("updateForm", updateForm);
-        return "team2/update";
-    }
+
+		updateForm.setEmployeeId(emp.getEmployeeId());
+		// updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
+
+		updateForm.setEmployeeName(emp.getEmployeeName());
+		updateForm.setEmployeeNameKana(emp.getEmployeeNameKana());
+		updateForm.setEmployeeGenderId(emp.getEmployeeGenderId());
+		updateForm.setEmployeeAge(emp.getEmployeeAge());
+		updateForm.setEmployeePhoneNumber(emp.getEmployeePhoneNumber());
+		updateForm.setEmployeeMail(emp.getEmployeeMail());
+		model.addAttribute("updateForm", updateForm);
+		return "team2/update";
+	}
 
 	@RequestMapping(value = "/emp/update", method = RequestMethod.POST)
 	public String updateToTabel(@ModelAttribute UpdateForm updateForm) {
@@ -131,7 +126,7 @@ public class MainController {
 		for (String employeeId : employeeIds) {
 			employeeService.updateDeletedFlag(employeeId);
 		}
-		return "redirect:/emp/info";
+		return "redirect://employee/search";
 	}
 
 	@GetMapping(value = "/employee/view")

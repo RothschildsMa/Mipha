@@ -42,7 +42,7 @@
 		</div>
 		</form>
 		
-		<form th:action="@{/deleteEmployees}" method="post" id="deleteForm">
+		<form th:action="@{/employee/search}" th:method="post" th:object="${updateForm}" id="deleteForm">
  			 <input type="hidden" name="employeeIds" id="employeeIds"/>
 			<button type="button" class="btn btn-danger delete_css" onclick="deleteEmployees()">削除</button>
 		</form>
@@ -78,6 +78,6 @@
 
            </tr>
 	</table>
-	<div>
+	</div>
 </body>
 </html>
