@@ -42,11 +42,7 @@
 		</div>
 		</form>
 		
-		<form th:action="@{/employee/search}" th:method="post" th:object="${updateForm}" id="deleteForm">
- 			 <input type="hidden" name="employeeIds" id="employeeIds"/>
-			<button type="button" class="btn btn-danger delete_css" onclick="deleteEmployees()">削除</button>
-		</form>
-		
+	
 	
 	<div class="table-container" th:if="${employeeList}">
 	<table>
@@ -64,20 +60,26 @@
 		</tr>
 		
 		
-		<tr th:each="employee : ${employeeList}" th:object="${employee}">
-             <td><input type="checkbox" name="employeeIds" th:value="${employeeId}"></td>
-             <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
+		<tr th:each="employee : ${employeeList}">
+             <td><input type="checkbox"th:field="*{selectedId}"th:value="${employee.employeeId}"></td>
+             <td><a th:href="@{/emp/{id}/update(id=*{employee.employeeId})}" th:text="*{employee.employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
-             <td th:text="*{employeeName}"></td>
-             <td th:text="*{employeeNameKana}"></td>
-             <td th:text="*{employeeGenderId}"></td>
-             <td th:text="*{employeeAge}"></td>
-             <td th:text="*{employeeDepatmentId}"></td>
-             <td th:text="*{employeePhoneNumber}"></td>
-             <td th:text="*{employeeMail}"></td>
+             <td th:text="*{employee.employeeName}"></td>
+             <td th:text="*{employee.employeeNameKana}"></td>
+             <td th:text="*{employee.employeeGenderId}"></td>
+             <td th:text="*{employee.employeeAge}"></td>
+             <td th:text="*{employee.employeeDepatmentId}"></td>
+             <td th:text="*{employee.employeePhoneNumber}"></td>
+             <td th:text="*{employee.employeeMail}"></td>
 
            </tr>
 	</table>
 	</div>
+	
+	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm">
+ 		
+		<button type="submit" class="btn btn-danger delete_css">削除</button>
+	</form>
+		
 </body>
 </html>

@@ -38,8 +38,8 @@ public class EmployeeService {
 	}
 
 	//削除フラグ
-	public void updateDeletedFlag(String employeeId) {
-		employeeMapper.updateEmployeeDeletedFlag(employeeId);
+	public void deleteEmployees(String employeeId) {
+		employeeMapper.deleteEmployees(employeeId);
 	}
 
 	public List<Employee> findByCondition(UpdateForm form) {

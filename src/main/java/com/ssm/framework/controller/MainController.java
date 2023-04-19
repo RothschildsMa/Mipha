@@ -1,6 +1,7 @@
 package com.ssm.framework.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.form.LoginForm;
@@ -41,6 +41,7 @@ public class MainController {
 	public String check(LoginForm loginForm,Model model) {
 
 		Employee emp = loginService.checkId(loginForm);
+		
 		if (emp == null) {
 			return "redirect:/login";
 		} else {
@@ -62,6 +63,7 @@ public class MainController {
 	public String employeeInformation(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
+		model.addAttribute("selectedId",new ArrayList<String>());
 		model.addAttribute("updateForm", new UpdateForm());
 		return "team2/emp2";
 	}
@@ -82,7 +84,6 @@ public class MainController {
 	}
 
 	@GetMapping("/emp/{id}/update")
-
     public String updateView(@PathVariable String id, Model model) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -122,11 +123,12 @@ public class MainController {
 
 	//削除フラグ用
 	@PostMapping("/deleteEmployees")
-	public String deleteEmployees(@RequestParam("employeeIds") String[] employeeIds) {
-		for (String employeeId : employeeIds) {
-			employeeService.updateDeletedFlag(employeeId);
+	public String deleteEmployees(@ModelAttribute("selectedId") ArrayList<String> selectedId){
+		
+		for (String employeeId : selectedId) {
+			employeeService.deleteEmployees(employeeId);
 		}
-		return "redirect://employee/search";
+		return "redirect:/emp/info";
 	}
 
 	@GetMapping(value = "/employee/view")
