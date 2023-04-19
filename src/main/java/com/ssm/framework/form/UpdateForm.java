@@ -36,5 +36,11 @@ public class UpdateForm implements Serializable {
 
 	//社員メールアドレス
 	private String employeeMail;
+	
+	//入社年月日
+	private String startDate;
+		
+	//入社年月日
+	private String endDate;
 
 }
