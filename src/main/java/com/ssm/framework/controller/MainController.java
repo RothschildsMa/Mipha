@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.form.LoginForm;
@@ -141,8 +142,8 @@ public class MainController {
 	@GetMapping(value = "/employee/employInformationDisplay")
 	public String showList2(Model model, UpdateForm form,
 			@RequestParam("employeeId") String employeeInput,
-			@RequestParam("employeeDepatmentId") String employeeDepatmentInput
-			,@RequestParam("startDate") String startDateInput,
+			@RequestParam("employeeDepatmentId") String employeeDepatmentInput,
+			@RequestParam("startDate") String startDateInput,
 			@RequestParam("endDate") String endDateInput) {
 		String strDt = form.getStartDate();
 		String endDt = form.getEndDate();
