@@ -1,7 +1,6 @@
 package com.ssm.framework.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ public class MainController {
 	public String employeeInformation(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
-		model.addAttribute("selectedId",new ArrayList<String>());
+		//model.addAttribute("selectedId",new ArrayList<String>());
 		model.addAttribute("updateForm", new UpdateForm());
 		return "team2/emp2";
 	}
@@ -124,10 +123,13 @@ public class MainController {
 
 	//削除フラグ用
 	@PostMapping("/deleteEmployees")
-	public String deleteEmployees(@ModelAttribute("selectedId") ArrayList<String> selectedId){
+	public String deleteEmployees(List<Employee> empList){
 		
-		for (String employeeId : selectedId) {
-			employeeService.deleteEmployees(employeeId);
+		for (Employee emp : empList) {
+			if(emp.isCheck()) {
+				employeeService.deleteEmployees(emp.getEmployeeId());
+			}
+			
 		}
 		return "redirect:/emp/info";
 	}

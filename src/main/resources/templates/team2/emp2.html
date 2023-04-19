@@ -61,7 +61,7 @@
 		
 		
 		<tr th:each="employee : ${employeeList}">
-             <td><input type="checkbox"th:field="*{selectedId}"th:value="${employee.employeeId}"></td>
+             <td><input type="checkbox"th:field="*{employee.check}"></td>
              <td><a th:href="@{/emp/{id}/update(id=*{employee.employeeId})}" th:text="*{employee.employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employee.employeeName}"></td>
