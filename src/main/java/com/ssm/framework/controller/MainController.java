@@ -38,7 +38,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
-	public String displayList(LoginForm loginForm,Model model) {
+	public String check(LoginForm loginForm,Model model) {
 		
 		Employee emp = loginService.checkId(loginForm);
 		if(emp == null) {
@@ -73,7 +73,7 @@ public class MainController {
 
 	//社員情報登録画面
 	@GetMapping(value = "/emp/add")
-	public String displayAdd(Model model) {
+	public String addView(Model model) {
 		model.addAttribute("form", new UpdateForm());
 		return "team2/register2";
 	}
@@ -89,7 +89,7 @@ public class MainController {
 	
 	
 	@GetMapping("/emp/{id}/update")
-    public String displayEdit(@PathVariable String id, Model model) {
+    public String updateView(@PathVariable String id, Model model) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
