@@ -129,7 +129,6 @@ public class MainController {
 			if(emp.isCheck()) {
 				employeeService.deleteEmployees(emp.getEmployeeId());
 			}
-			
 		}
 		return "redirect:/emp/info";
 	}
