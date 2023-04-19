@@ -138,13 +138,14 @@ public class MainController {
 	public String showList2(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
+		model.addAttribute("employeeDepatmentInput", 003);
 		return "team2/employInformationDisplay";
 	}
 
 	@GetMapping(value = "/employee/employInformationDisplay")
 	public String showList2(Model model, UpdateForm form,
 			@RequestParam("employeeId") String employeeInput,
-			@RequestParam("employeeDepatmentId") String employeeDepatmentInput,
+			@RequestParam("employeeDepatmentId") int employeeDepatmentInput,
 			@RequestParam("startDate") String startDateInput,
 			@RequestParam("endDate") String endDateInput) {
 		String strDt = form.getStartDate();
