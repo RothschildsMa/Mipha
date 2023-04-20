@@ -4,6 +4,19 @@
 	<link rel="stylesheet" type="text/css" href="/employInformationDisplay.css">
 	<title>社员信息管理系统</title>
 </head>
+
+    <script>
+      function deleteData() {
+        // 获取checkbox元素
+        const checkbox = document.getElementById("deleteCheckbox");
+        // 检查checkbox是否选中
+        if (!checkbox.checked) {
+          alert("社員情報一覧を選択してください。");
+          return;
+        }
+      }
+    </script>
+    
 <body>
 	<div class="header">
   <h1 class="header_css">株式会社ＸＸＸ</h1>
@@ -58,7 +71,7 @@
 		</tr>
 		
 		<tr th:each="employee : ${employeeList}" th:object="${employee}">
-		     <td><input type="checkbox" th:name="ids[]" th:value="${employee.id}"></td>
+		     <td><input type="checkbox" th:name="ids[]" th:value="${employee.id}" id="deleteCheckbox"></td>
              <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
@@ -74,7 +87,7 @@
 	<div>
 	
 	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm" >
-		<button type="submit" class="delete_css">削除</button>
+		<button type="submit" class="delete_css" onclick="deleteData()">削除</button>
 		<input type="hidden" th:name="ids" th:value="${ids}" />
 	</form>
 </body>
