@@ -9,5 +9,6 @@ public class LoginForm {
 	
 	//パスワード
 	private String password;
+	
 
 }

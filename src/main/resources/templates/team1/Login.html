@@ -49,17 +49,23 @@
     input[type="submit"]:hover {
       background-color: #3E8E41;
     }
+    .error-message {
+      color: red;
+    }
   </style>
 </head>
 <body>
   <h1>ログイン画面</h1>
   <form  th:action="@{/emp/login}" th:object="${loginForm}" method="post">
     <label for="employee-id">社員ID:</label>
-    <input type="text" th:field="*{employeeId}" id="employee-id" name="employee-id" required>
+    <input type="text" th:field="*{employeeId}" id="employee-id" name="employee-id" pattern="^[0-9A-Z]+$" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required>
     <label for="password">パスワード:</label>
-    <input type="password" th:field="*{password}" id="password" name="password" required>
+    <input type="password" th:field="*{password}" id="password" name="password" pattern="^[0-9A-Z]+$" size="20" placeholder="N0000000（8桁）" maxlength="8" required>
+    <p th:if="${error}"class="error-message">社員IDまたはパスワードが間違っています、再度入力しなおしてください。</p>
     <input type="submit" value="ログイン">
+    
   </form>
+  
 </body>
 </html>
 

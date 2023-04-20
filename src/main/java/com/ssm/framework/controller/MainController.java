@@ -29,12 +29,14 @@ public class MainController {
 	private EmployeeService employeeService;
 	@Autowired
 	private LoginService loginService;
+	private boolean error=false;
 
 	@GetMapping("login")
 	public String loginView(Model model) {
 		//LoginForm loginForm = new LoginForm();
 
 		model.addAttribute("loginForm", new LoginForm());
+		model.addAttribute("error",error);
 		return "team1/Login";
 
 	}
@@ -45,8 +47,10 @@ public class MainController {
 		Employee emp = loginService.checkId(loginForm);
 
 		if (emp == null) {
+			error = true;
 			return "redirect:/login";
 	    }else{
+	    	error = false;
 			return "redirect:/emp/info";
 				
 		}
