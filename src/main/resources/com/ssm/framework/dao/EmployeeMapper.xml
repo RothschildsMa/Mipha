@@ -6,8 +6,12 @@
         
 <mapper namespace="com.ssm.framework.dao.EmployeeMapper">
     <!-- 全件検索 -->
-    <select id="findAll" resultType="com.ssm.framework.entity.Employee">
-        SELECT * FROM T_employee WHERE DEL_FLG = 0
+    <select id="findAll" resultType="com.ssm.framework.entity.Employee">    
+        SELECT t1.*, t2.CODE_NAME as DEPATMENT_NAME, t3.CODE_NAME as GENDER_NAME
+			FROM T_employee t1
+			INNER JOIN m_code t2 ON t1.EMPLOYEE_DEPATMENTID = t2.CODE_ID and t2.CODE_KBN = '0001'
+			INNER JOIN m_code t3 ON t1.EMPLOYEE_GENDERID = t3.CODE_ID and t3.CODE_KBN = '0002'
+			WHERE t1.DEL_FLG =0;
     </select>
     
     <select id="linkId" resultType="com.ssm.framework.entity.Employee">
@@ -16,26 +20,24 @@
     
     <!--条件検索-->
     <select id="iFindByCondition" resultType="com.ssm.framework.entity.Employee">
-        SELECT * FROM T_employee
+        SELECT t1.*, t2.CODE_NAME as DEPATMENT_NAME, t3.CODE_NAME as GENDER_NAME
+			FROM T_employee t1
+			INNER JOIN m_code t2 ON t1.EMPLOYEE_DEPATMENTID = t2.CODE_ID and t2.CODE_KBN = '0001'
+			INNER JOIN m_code t3 ON t1.EMPLOYEE_GENDERID = t3.CODE_ID and t3.CODE_KBN = '0002'
 		  <where>
-		  DEL_FLG = 0
 		    <if test="employeeId != null and employeeId != ''">
-		      AND EMPLOYEE_ID = #{employeeId}
+		      AND t1.EMPLOYEE_ID = #{employeeId}
 		    </if>
 		    <if test="employeeDepatmentId != null and employeeDepatmentId != ''">
-            AND EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}
+            AND t1.EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}
         	</if>
         	<if test="startDate!=null and startDate!=''">
-
-                and JOIN_DATE &gt;= #{startDate}
-
+                and t1.JOIN_DATE &gt;= #{startDate}
             </if>
-
             <if test="endDate !=null and endDate !=''">
-
-                and JOIN_DATE &lt;= #{endDate}
-
+                and t1.JOIN_DATE &lt;= #{endDate}
             </if>
+            AND t1.DEL_FLG = 0
 		  </where>
     </select>
     
