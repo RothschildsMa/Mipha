@@ -65,6 +65,8 @@ public class MainController {
 		model.addAttribute("employeeList", empList);
 		//model.addAttribute("selectedId",new ArrayList<String>());
 		model.addAttribute("updateForm", new UpdateForm());
+		
+		
 		return "team2/emp2";
 	}
 
@@ -123,11 +125,13 @@ public class MainController {
 
 	//削除フラグ用
 	@PostMapping("/deleteEmployees")
-	public String deleteEmployees(List<Employee> empList){
+	public String deleteEmployees(@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
 		
-		for (Employee emp : empList) {
-			if(emp.isCheck()) {
-				employeeService.deleteEmployees(emp.getEmployeeId());
+		if(!selectedEmployees.isEmpty()) {
+			for (int id : selectedEmployees) {
+			
+				employeeService.deleteEmployees(id);
+			
 			}
 		}
 		return "redirect:/emp/info";

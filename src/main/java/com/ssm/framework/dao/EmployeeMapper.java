@@ -22,6 +22,6 @@ public interface EmployeeMapper {
 	List<Employee> iFindByCondition(UpdateForm form);
 
 	//削除フラグ用
-	void deleteEmployees(String employeeId);
+	void deleteEmployees(int id);
 
 }

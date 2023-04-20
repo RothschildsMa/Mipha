@@ -8,8 +8,9 @@ import lombok.Data;
 @Data
 public class Employee implements Serializable{
 	
+	
 	//自動採番IDSerializable
-	private Long id;
+	private int id;
 	
 	//社員ID
 	private String employeeId;
@@ -57,6 +58,6 @@ public class Employee implements Serializable{
 	private int updateUser;
 	
 	
-	private boolean check;
+	private boolean checked;
 	
 }
