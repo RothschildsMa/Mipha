@@ -29,11 +29,15 @@ public class Employee implements Serializable{
 	//性別ID
 	private String employeeGenderId;
 	
+	private String genderName;
+	
 	//年齢
 	private int employeeAge;
 	
 	//所属ID
 	private String employeeDepatmentId;
+	
+	private String depatmentName;
 	
 	//電話番号
 	private String employeePhoneNumber;
