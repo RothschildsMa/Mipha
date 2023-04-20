@@ -6,12 +6,12 @@
 </head>
 <body>
 	<div class="header">
-		<h1 class="header_css">株式会社ＸＸＸ</h1>    
-		<button class="logout_css">ログアウ</button>
-	</div>
-	<div class="p_css">
-		<p class="p1">社員情報一覧</p>
-	</div>
+  <h1 class="header_css">株式会社ＸＸＸ</h1>
+  <!-- ログアウトフォーム -->
+  <form th:action="@{/logout}" >
+    <button type="submit" class="logout_css">ログアウト</button>
+  </form>
+</div>
 	
 	<form th:action="@{/emp/add}">
 		<button id="loginBtn" class="loginBtu_css">登録</button>
@@ -22,13 +22,13 @@
 			<label for="member-id" class="label1">社员ID:</label>
 			<input type="text" name="employeeId" class="input1" th:value="${employeeInput}"><br><br>
 			<label for="department" class="label2">所属部门:</label>
-			<select id="department" name="employeeDepatmentId" class="select1" th:value="${employeeDepatmentInput}">
-				<option value="001">所属不明</option>
-				<option value="002">管理部</option>
-				<option value="003">営業部</option>
-				<option value="004">第一開発部</option>
-				<option value="005">第ニ開発部</option>
-				<option value="006">人事部</option>
+			<select id="department" class="select1" name = "employeeDepatmentId">
+				<option value="001" th:text="所属不明" th:selected="${employeeDepatmentInput == 001}"></option>
+				<option value="002" th:text="管理部" th:selected="${employeeDepatmentInput == 002}"></option>
+				<option value="003" th:text="営業部" th:selected="${employeeDepatmentInput == 003}"></option>
+				<option value="004" th:text="第一開発部" th:selected="${employeeDepatmentInput == 004}"></option>
+				<option value="005" th:text="第ニ開発部" th:selected="${employeeDepatmentInput == 005}"></option>
+				<option value="006" th:text="人事部" th:selected="${employeeDepatmentInput == 006}"></option>
 			</select><br><br>
 			<button id="searchBtn" type="submit" class="searchBtu_css">検索</button>
 		</div>
@@ -39,7 +39,6 @@
 			<input type="date" id="end-date" name="endDate"class="timeEnd" th:value="${endDateInput}"><br><br>
 		</div>
 		
-		<input type="submit" value="删除" class="delete_css">
 	</form>
 	
 	<div class="table-container">
@@ -59,20 +58,24 @@
 		</tr>
 		
 		<tr th:each="employee : ${employeeList}" th:object="${employee}">
-		     <td class = 'checkBox_css'><input type="checkbox"></td>
+		     <td><input type="checkbox" th:name="ids[]" th:value="${employee.id}"></td>
              <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
              <td th:text="*{employeeNameKana}"></td>
-             <td th:text="*{employeeGenderId}"></td>
+             <td th:text="*{genderName}"></td>
              <td th:text="*{employeeAge}"></td>
-             <td th:text="*{employeeDepatmentId}"></td>
+             <td th:text="*{depatmentName}"></td>
              <td th:text="*{employeePhoneNumber}"></td>
              <td th:text="*{employeeMail}"></td>
-
            </tr>
            </tbody>
 	</table>
 	<div>
+	
+	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm" >
+		<button type="submit" class="delete_css">削除</button>
+		<input type="hidden" th:name="ids" th:value="${ids}" />
+	</form>
 </body>
 </html>

@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,19 +77,20 @@ public class MainController {
 	//社員情報登録画面
 	@GetMapping(value = "/emp/add")
 	public String addView(Model model) {
-		model.addAttribute("form", new UpdateForm());
+		UpdateForm updateForm = new UpdateForm();
+		Employee emp = employeeService.findMaxIdOfEmployee();
+		Number empId = Number.class.cast(Integer.parseInt(emp.getEmployeeId().substring(3)) + 1 );
+		String empIdStr = "0000000" + empId.toString();
+		String employeeId = empIdStr.substring(empIdStr.length() - 7);
+		updateForm.setEmployeeId("NTS" + employeeId);
+		model.addAttribute("form", updateForm);
 		return "team2/register2";
 	}
 
 	//社員情報登録処理
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
-	public String addToTable(@ModelAttribute("form") @Validated UpdateForm updateForm, BindingResult bindingResult,
-			Model model) {
-		if (bindingResult.hasErrors()) {
-			return "emp2";
-		}
-
-//		employeeService.add(updateForm); //情報挿入
+	public String addToTable(UpdateForm updateForm) {
+		employeeService.add(updateForm); //情報挿入
 		return "redirect:/emp/info"; //リダイレクト
 	}
 

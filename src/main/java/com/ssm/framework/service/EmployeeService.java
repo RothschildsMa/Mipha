@@ -34,7 +34,7 @@ public class EmployeeService {
 		}
 	}
 
-	public void add(UpdateForm form) throws DuplicateEmployeeIdException {
+	public void add(UpdateForm form){
 		String employeeId = form.getEmployeeId();
 
 		// 重複する社員IDが存在しないかチェックする
@@ -68,6 +68,10 @@ public class EmployeeService {
 	public List<Employee> findByCondition(UpdateForm form) {
 		return employeeMapper.iFindByCondition(form);
 
+	}
+	
+	public Employee findMaxIdOfEmployee() {
+		return employeeMapper.iFindMaxIdOfEmployee();
 	}
 
 }
