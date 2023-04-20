@@ -53,7 +53,7 @@
 	<!-- 更新 -->
 	<update id="update">
 	  UPDATE T_employee SET
-	  EMPLOYEE_NAME = #{employeeName}, EMPLOYEE_NAMEKANA = #{employeeNameKana}, 
+	  EMPLOYEE_NAME = #{employeeName}, JOIN_DATE = #{joinDate},EMPLOYEE_NAMEKANA = #{employeeNameKana}, 
 	  EMPLOYEE_GENDERID = #{employeeGenderId}, EMPLOYEE_AGE = #{employeeAge}, EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}, 
 	  EMPLOYEE_PHONENUMBER = #{employeePhoneNumber}, EMPLOYEE_MAIL = #{employeeMail}
 	  WHERE EMPLOYEE_ID = #{employeeId}

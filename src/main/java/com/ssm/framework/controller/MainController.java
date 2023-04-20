@@ -87,7 +87,7 @@ public class MainController {
 			return "emp2";
 		}
 
-		employeeService.add(updateForm); //情報挿入
+//		employeeService.add(updateForm); //情報挿入
 		return "redirect:/emp/info"; //リダイレクト
 	}
 
@@ -103,6 +103,7 @@ public class MainController {
 		// updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
 
 		updateForm.setEmployeeName(emp.getEmployeeName());
+		updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
 		updateForm.setEmployeeNameKana(emp.getEmployeeNameKana());
 		updateForm.setEmployeeGenderId(emp.getEmployeeGenderId());
 		updateForm.setEmployeeAge(emp.getEmployeeAge());
@@ -130,21 +131,10 @@ public class MainController {
 
 	//削除フラグ用
 	@PostMapping("/deleteEmployees")
-<<<<<<< HEAD
-	public String deleteEmployees(List<Employee> empList) {
-
-		for (Employee emp : empList) {
-			if (emp.isCheck()) {
-				employeeService.deleteEmployees(emp.getEmployeeId());
-=======
 	public String deleteEmployees(@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
-		
 		if(!selectedEmployees.isEmpty()) {
 			for (int id : selectedEmployees) {
-			
 				employeeService.deleteEmployees(id);
-			
->>>>>>> branch 'master' of https://github.com/RothschildsMa/Mipha.git
 			}
 		}
 		return "redirect:/emp/info";
@@ -166,12 +156,8 @@ public class MainController {
 			@RequestParam("endDate") String endDateInput) {
 		String strDt = form.getStartDate();
 		String endDt = form.getEndDate();
-		if (strDt != null && strDt != null) {
-			form.setStartDate(strDt);
-		}
-		if (endDt != null && endDt != null) {
-			form.setEndDate(endDt);
-		}
+		form.setStartDate(strDt);
+		form.setEndDate(endDt);
 		model.addAttribute("employeeInput", employeeInput);
 		model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
 		model.addAttribute("startDateInput", startDateInput);
