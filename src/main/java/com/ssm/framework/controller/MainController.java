@@ -38,17 +38,18 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
-	public String displayList(LoginForm loginForm, Model model) {
+	public String disPlay(LoginForm loginForm, Model model) {
 
-		Employee emp = loginService.checkId(loginForm);
-		if (emp == null) {
+		 Employee emp = loginService.checkId(loginForm);
+		 
+		 if (emp == null) {
 			return "redirect:/login";
-		} else {
+	    }else{
 			return "redirect:/emp/info";
+				
 		}
 
 	}
-
 	//debugリスト表示
 	@GetMapping(value = "/employee/list")
 	public String showList(Model model) {

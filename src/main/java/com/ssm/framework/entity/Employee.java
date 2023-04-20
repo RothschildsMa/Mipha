@@ -56,4 +56,6 @@ public class Employee implements Serializable{
 	//更新者id
 	private int updateUser;
 
+	
+
 }
