@@ -167,4 +167,10 @@ public class MainController {
 		model.addAttribute("employeeList", empList);
 		return "team2/employInformationDisplay";
 	}
+	//ログアウト用
+	 @GetMapping("/logout")
+	 public String logout(Model model) {
+	  
+	     return "redirect:/login";
+	 }
 }
