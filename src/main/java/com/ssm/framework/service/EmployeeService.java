@@ -69,5 +69,9 @@ public class EmployeeService {
 		return employeeMapper.iFindByCondition(form);
 
 	}
+	
+	public Employee findMaxIdOfEmployee() {
+		return employeeMapper.iFindMaxIdOfEmployee();
+	}
 
 }
