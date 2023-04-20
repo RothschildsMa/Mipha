@@ -4,6 +4,9 @@
 	<link rel="stylesheet" type="text/css" href="/employInformationDisplay.css">
 	<title>勤怠管理システム</title>
 </head>
+
+
+
 <body>
 	<script src="../../static/js/deleteEmployee.js"></script>
 	<div class="header">
@@ -64,7 +67,7 @@
 		
 		
 		<tr th:each="employee, status : ${employeeList}" th:object="${employee}">
-             <td><input type="checkbox" th:checked="${employee.checked}" 
+             <td><input type="checkbox" id="checkbox" th:checked="${employee.checked}" 
              th:name="selectedEmployees" 
              th:value="${employee.id}" 
              th:id="${'selectedEmployees_' + status.index + '_checked'}"></td>
@@ -81,8 +84,35 @@
            </tr>
 	</table>
 
-		
-		<button type="submit" class="btn btn-danger delete_css">削除</button>
+	<script>
+      // チェックボックスの状態を取得し、ボタンの活性化を制御する関数
+      function toggleButton() {
+         var checkboxes = document.getElementsByName("selectedEmployees");
+         var deleteButton = document.getElementById("deleteButton");
+        
+         var checked = false;
+         for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    checked = true;
+                    break;
+                }
+            }
+
+        if (checked) {
+                deleteButton.removeAttribute("disabled");
+            } else {
+                deleteButton.setAttribute("disabled", "true");
+            }
+      }
+
+    	// チェックボックスの状態が変化したときにtoggleButton関数を呼び出す
+        var checkboxes = document.getElementsByName("selectedEmployees");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener("change", toggleButton);
+        }
+        
+	</script>
+		<button type="submit" id="deleteButton" class="btn btn-danger delete_css" disabled>削除</button>
 	
 	</div>
 
