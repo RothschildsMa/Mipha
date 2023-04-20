@@ -40,9 +40,12 @@
 			<p class="p2">~</p>
 			<input type="date" id="end-date" name="end-date"class="timeEnd"><br><br>
 		</div>
-		</form>
+	</form>
 		
 	
+	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm">
+		
+
 	
 	<div class="table-container" th:if="${employeeList}">
 	<table>
@@ -60,25 +63,30 @@
 		</tr>
 		
 		
-		<tr th:each="employee : ${employeeList}">
-             <td><input type="checkbox"th:field="*{employee.check}"></td>
-             <td><a th:href="@{/emp/{id}/update(id=*{employee.employeeId})}" th:text="*{employee.employeeId}"></a></td>
+		<tr th:each="employee, status : ${employeeList}" th:object="${employee}">
+             <td><input type="checkbox" th:checked="${employee.checked}" 
+             th:name="selectedEmployees" 
+             th:value="${employee.id}" 
+             th:id="${'selectedEmployees_' + status.index + '_checked'}"></td>
+             <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
-             <td th:text="*{employee.employeeName}"></td>
-             <td th:text="*{employee.employeeNameKana}"></td>
-             <td th:text="*{employee.employeeGenderId}"></td>
-             <td th:text="*{employee.employeeAge}"></td>
-             <td th:text="*{employee.employeeDepatmentId}"></td>
-             <td th:text="*{employee.employeePhoneNumber}"></td>
-             <td th:text="*{employee.employeeMail}"></td>
+             <td th:text="*{employeeName}"></td>
+             <td th:text="*{employeeNameKana}"></td>
+             <td th:text="*{employeeGenderId}"></td>
+             <td th:text="*{employeeAge}"></td>
+             <td th:text="*{employeeDepatmentId}"></td>
+             <td th:text="*{employeePhoneNumber}"></td>
+             <td th:text="*{employeeMail}"></td>
 
            </tr>
 	</table>
-	</div>
-	
-	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm">
- 		
+
+		
 		<button type="submit" class="btn btn-danger delete_css">削除</button>
+	
+	</div>
+
+		
 	</form>
 		
 </body>

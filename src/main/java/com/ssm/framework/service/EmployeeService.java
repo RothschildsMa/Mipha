@@ -55,8 +55,8 @@ public class EmployeeService {
 	}
 
 	//削除フラグ
-	public void deleteEmployees(String employeeId) {
-		employeeMapper.deleteEmployees(employeeId);
+	public void deleteEmployees(int id) {
+		employeeMapper.deleteEmployees(id);
 	}
 
 	//社員ID重複時エラー表示

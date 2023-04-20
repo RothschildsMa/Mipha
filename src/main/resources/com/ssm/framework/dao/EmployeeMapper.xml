@@ -61,7 +61,7 @@
 	
 	<!-- 削除 -->
 	<update id="deleteEmployees">
-    UPDATE T_employee SET DEL_FLG = 1 WHERE EMPLOYEE_ID = #{employeeId}
+    UPDATE T_employee SET DEL_FLG = 1 WHERE ID = #{id}
   </update>
   
 </mapper>

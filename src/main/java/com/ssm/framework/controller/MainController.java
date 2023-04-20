@@ -67,6 +67,8 @@ public class MainController {
 		model.addAttribute("employeeList", empList);
 		//model.addAttribute("selectedId",new ArrayList<String>());
 		model.addAttribute("updateForm", new UpdateForm());
+		
+		
 		return "team2/emp2";
 	}
 
@@ -128,11 +130,21 @@ public class MainController {
 
 	//削除フラグ用
 	@PostMapping("/deleteEmployees")
+<<<<<<< HEAD
 	public String deleteEmployees(List<Employee> empList) {
 
 		for (Employee emp : empList) {
 			if (emp.isCheck()) {
 				employeeService.deleteEmployees(emp.getEmployeeId());
+=======
+	public String deleteEmployees(@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
+		
+		if(!selectedEmployees.isEmpty()) {
+			for (int id : selectedEmployees) {
+			
+				employeeService.deleteEmployees(id);
+			
+>>>>>>> branch 'master' of https://github.com/RothschildsMa/Mipha.git
 			}
 		}
 		return "redirect:/emp/info";
@@ -168,4 +180,10 @@ public class MainController {
 		model.addAttribute("employeeList", empList);
 		return "team2/employInformationDisplay";
 	}
+	//ログアウト用
+	 @GetMapping("/logout")
+	 public String logout(Model model) {
+	  
+	     return "redirect:/login";
+	 }
 }
