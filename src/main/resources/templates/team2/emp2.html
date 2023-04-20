@@ -67,7 +67,7 @@
 		
 		
 		<tr th:each="employee, status : ${employeeList}" th:object="${employee}">
-             <td><input type="checkbox" id="checkbox" th:checked="${employee.checked}" 
+             <td><input type="checkbox" th:checked="${employee.checked}" 
              th:name="selectedEmployees" 
              th:value="${employee.id}" 
              th:id="${'selectedEmployees_' + status.index + '_checked'}"></td>
