@@ -19,7 +19,7 @@ public interface EmployeeMapper {
 
 	void update(UpdateForm form);
 
-	void exists(int id);
+	boolean exists(int id);
 
 	List<Employee> iFindByCondition(UpdateForm form);
 

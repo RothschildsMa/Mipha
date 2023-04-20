@@ -61,7 +61,7 @@ public class EmployeeService {
 
 	//社員ID重複時エラー表示
 	public boolean exists(int id) {
-		employeeMapper.exists(id) > 0;
+		return employeeMapper.exists(id) > 0;
 	}
 
 	public List<Employee> findByCondition(UpdateForm form) {
