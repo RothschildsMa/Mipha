@@ -6,12 +6,12 @@
 </head>
 <body>
 	<div class="header">
-		<h1 class="header_css">株式会社ＸＸＸ</h1>    
-		<button class="logout_css">ログアウ</button>
-	</div>
-	<div class="p_css">
-		<p class="p1">社員情報一覧</p>
-	</div>
+  <h1 class="header_css">株式会社ＸＸＸ</h1>
+  <!-- ログアウトフォーム -->
+  <form th:action="@{/logout}" >
+    <button type="submit" class="logout_css">ログアウト</button>
+  </form>
+</div>
 	
 	<form th:action="@{/emp/add}">
 		<button id="loginBtn" class="loginBtu_css">登録</button>

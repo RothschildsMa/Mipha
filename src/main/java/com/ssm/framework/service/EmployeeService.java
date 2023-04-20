@@ -34,7 +34,7 @@ public class EmployeeService {
 		}
 	}
 
-	public void add(UpdateForm form) throws DuplicateEmployeeIdException {
+	public void add(UpdateForm form){
 		String employeeId = form.getEmployeeId();
 
 		// 重複する社員IDが存在しないかチェックする
