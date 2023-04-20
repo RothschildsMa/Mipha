@@ -86,6 +86,19 @@
 
 	<script>
 		function toggleButton() {
+			 // ボタンをクリックしたときにチェックが0個ならエラーメッセージを表示する
+		  deleteButton.addEventListener("click", function() {
+		    var checkedCount = 0;
+		    for (var i = 0; i < checkboxes.length; i++) {
+		      if (checkboxes[i].checked) {
+		        checkedCount++;
+		      }
+		    }
+		    if (checkedCount == 0) {
+		      alert("削除する社員を選択してください。");
+		    }
+		  });
+		  
 		    var checkboxes = document.getElementsByName("selectedEmployees");
 		    var deleteButton = document.getElementById("deleteButton");
 		    var checkedCount = 0;
@@ -109,18 +122,7 @@
 		
 		  var deleteButton = document.getElementById("deleteButton");
 		
-		  // ボタンをクリックしたときにチェックが0個ならエラーメッセージを表示する
-		  deleteButton.addEventListener("click", function() {
-		    var checkedCount = 0;
-		    for (var i = 0; i < checkboxes.length; i++) {
-		      if (checkboxes[i].checked) {
-		        checkedCount++;
-		      }
-		    }
-		    if (checkedCount == 0) {
-		      alert("削除する社員を選択してください。");
-		    }
-		  });
+		 
 		/*// チェックボックスの状態を取得し、ボタンの活性化を制御する関数
 		 function toggleButton() {
          var checkboxes = document.getElementsByName("selectedEmployees");
@@ -148,7 +150,7 @@
         }
         */
 	</script>
-		<button type="submit" id="deleteButton" class="btn btn-danger delete_css" disabled>削除</button>
+		<button type="submit" id="deleteButton" class="btn btn-danger delete_css" >削除</button>
 	
 	</div>
 
