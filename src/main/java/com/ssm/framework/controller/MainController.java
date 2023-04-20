@@ -75,7 +75,13 @@ public class MainController {
 	//社員情報登録画面
 	@GetMapping(value = "/emp/add")
 	public String addView(Model model) {
-		model.addAttribute("form", new UpdateForm());
+		UpdateForm updateForm = new UpdateForm();
+		Employee emp = employeeService.findMaxIdOfEmployee();
+		Number empId = Number.class.cast(Integer.parseInt(emp.getEmployeeId().substring(3)) + 1 );
+		String empIdStr = "0000000" + empId.toString();
+		String employeeId = empIdStr.substring(empIdStr.length() - 7);
+		updateForm.setEmployeeId("NTS" + employeeId);
+		model.addAttribute("form", updateForm);
 		return "team2/register2";
 	}
 
