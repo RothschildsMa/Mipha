@@ -86,7 +86,13 @@ public class MainController {
 	//社員情報登録処理
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
 	public String addToTable(UpdateForm updateForm) {
-		employeeService.add(updateForm); //情報挿入
+		try {
+			employeeService.add(updateForm); //情報挿入
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "team2/addFaild";
+		}
+		
 		return "redirect:/emp/info"; //リダイレクト
 	}
 
