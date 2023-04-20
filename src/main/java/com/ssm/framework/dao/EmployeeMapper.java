@@ -19,6 +19,8 @@ public interface EmployeeMapper {
 
 	void update(UpdateForm form);
 
+	void exists(int id);
+
 	List<Employee> iFindByCondition(UpdateForm form);
 
 	//削除フラグ用
