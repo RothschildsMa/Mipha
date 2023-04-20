@@ -46,12 +46,12 @@ public class MainController {
 
 		if (emp == null) {
 			return "redirect:/login";
-		} else {
+	    }else{
 			return "redirect:/emp/info";
+				
 		}
 
 	}
-
 	//debugリスト表示
 	@GetMapping(value = "/employee/list")
 	public String showList(Model model) {
