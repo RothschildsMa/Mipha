@@ -64,4 +64,9 @@
     UPDATE T_employee SET DEL_FLG = 1 WHERE ID = #{id}
   </update>
   
+   <!-- 最大IDのデータ-->
+   <select id = 'iFindMaxIdOfEmployee' resultType="com.ssm.framework.entity.Employee">
+   SELECT * FROM T_employee ORDER BY ID DESC LIMIT 1;
+   </select>
+   
 </mapper>

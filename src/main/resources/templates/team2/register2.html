@@ -78,7 +78,7 @@
 		
 		<dl>
 			<dt>社員ID<label class="required"></label></dt>
-			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required/></input></dd>
+			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" style="color: gray;" readonly required/></input></dd>
 		
 			<dt>パスワード<label class="required"></label></dt>
 			<dd><input type="text" th:field="*{password}" pattern="^[0-9A-Z]+$"name="password" size="20" placeholder="N0000000（8桁）" maxlength="8" required/></input></dd>

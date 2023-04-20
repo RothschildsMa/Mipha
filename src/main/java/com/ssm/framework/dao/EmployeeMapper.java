@@ -25,5 +25,6 @@ public interface EmployeeMapper {
 
 	//削除フラグ用
 	void deleteEmployees(int id);
-
+	
+	Employee iFindMaxIdOfEmployee();
 }
