@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +40,10 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
-	public String check(LoginForm loginForm,Model model) {
+	public String check(LoginForm loginForm, Model model) {
 
 		Employee emp = loginService.checkId(loginForm);
-		
+
 		if (emp == null) {
 			return "redirect:/login";
 		} else {
@@ -77,20 +79,23 @@ public class MainController {
 
 	//社員情報登録処理
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
-	public String addToTable(UpdateForm updateForm) {
-		// 社員情報の登録
+	public String addToTable(@ModelAttribute("form") @Validated UpdateForm updateForm, BindingResult bindingResult,
+			Model model) {
+		if (bindingResult.hasErrors()) {
+			return "emp2";
+		}
+
 		employeeService.add(updateForm); //情報挿入
 		return "redirect:/emp/info"; //リダイレクト
 	}
 
 	@GetMapping("/emp/{id}/update")
-    public String updateView(@PathVariable String id, Model model) {
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-        Employee emp = employeeService.linkId(id);
-        UpdateForm updateForm = new UpdateForm();
+	public String updateView(@PathVariable String id, Model model) {
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		Employee emp = employeeService.linkId(id);
+		UpdateForm updateForm = new UpdateForm();
 
 		updateForm.setEmployeeId(emp.getEmployeeId());
 		// updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
@@ -123,10 +128,10 @@ public class MainController {
 
 	//削除フラグ用
 	@PostMapping("/deleteEmployees")
-	public String deleteEmployees(List<Employee> empList){
-		
+	public String deleteEmployees(List<Employee> empList) {
+
 		for (Employee emp : empList) {
-			if(emp.isCheck()) {
+			if (emp.isCheck()) {
 				employeeService.deleteEmployees(emp.getEmployeeId());
 			}
 		}
@@ -149,10 +154,10 @@ public class MainController {
 			@RequestParam("endDate") String endDateInput) {
 		String strDt = form.getStartDate();
 		String endDt = form.getEndDate();
-		if(strDt != null && strDt != null) {
+		if (strDt != null && strDt != null) {
 			form.setStartDate(strDt);
 		}
-		if(endDt != null && endDt != null) {
+		if (endDt != null && endDt != null) {
 			form.setEndDate(endDt);
 		}
 		model.addAttribute("employeeInput", employeeInput);

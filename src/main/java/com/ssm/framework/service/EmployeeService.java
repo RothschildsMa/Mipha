@@ -22,14 +22,31 @@ public class EmployeeService {
 		return employeeMapper.findAll();
 
 	}
-	
+
 	public Employee linkId(String employeeId) {
 		return employeeMapper.linkId(employeeId);
 	}
 
 	//社員情報登録
-	public void add(UpdateForm form) {
+	public class DuplicateEmployeeIdException extends Exception {
+		public DuplicateEmployeeIdException(String message) {
+			super(message);
+		}
+	}
+
+	public void add(UpdateForm form) throws DuplicateEmployeeIdException {
+		String employeeId = form.getEmployeeId();
+
+		// 重複する社員IDが存在しないかチェックする
+		Employee existingEmployee = employeeMapper.findByEmployeeId(employeeId);
+		if (existingEmployee != null) {
+			throw new DuplicateEmployeeIdException("社員ID " + employeeId + " は既に存在します。");
+		}
+
+		// データベースに新しい社員を登録する
 		employeeMapper.add(form);
+	}
+
 	}
 
 	//社員情報更新
@@ -41,6 +58,10 @@ public class EmployeeService {
 	public void deleteEmployees(String employeeId) {
 		employeeMapper.deleteEmployees(employeeId);
 	}
+
+	//社員ID重複時エラー表示
+	public boolean exists(int id) {
+        return employeeMapper.countById(id) > 0;
 
 	public List<Employee> findByCondition(UpdateForm form) {
 		return employeeMapper.iFindByCondition(form);
