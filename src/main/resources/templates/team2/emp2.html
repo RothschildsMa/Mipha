@@ -4,6 +4,9 @@
 	<link rel="stylesheet" type="text/css" href="/employInformationDisplay.css">
 	<title>勤怠管理システム</title>
 </head>
+
+
+
 <body>
 	<script src="../../static/js/deleteEmployee.js"></script>
 	<div class="header">
@@ -40,13 +43,12 @@
 			<p class="p2">~</p>
 			<input type="date" id="end-date" name="end-date"class="timeEnd"><br><br>
 		</div>
-		</form>
+	</form>
 		
-		<form th:action="@{/employee/search}" th:method="post" th:object="${updateForm}" id="deleteForm">
- 			 <input type="hidden" name="employeeIds" id="employeeIds"/>
-			<button type="button" class="btn btn-danger delete_css" onclick="deleteEmployees()">削除</button>
-		</form>
+	
+	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm">
 		
+
 	
 	<div class="table-container" th:if="${employeeList}">
 	<table>
@@ -64,8 +66,11 @@
 		</tr>
 		
 		
-		<tr th:each="employee : ${employeeList}" th:object="${employee}">
-             <td><input type="checkbox" name="employeeIds" th:value="${employeeId}"></td>
+		<tr th:each="employee, status : ${employeeList}" th:object="${employee}">
+             <td><input type="checkbox" th:checked="${employee.checked}" 
+             th:name="selectedEmployees" 
+             th:value="${employee.id}" 
+             th:id="${'selectedEmployees_' + status.index + '_checked'}"></td>
              <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
@@ -78,6 +83,41 @@
 
            </tr>
 	</table>
+
+	<script>
+      // チェックボックスの状態を取得し、ボタンの活性化を制御する関数
+      function toggleButton() {
+         var checkboxes = document.getElementsByName("selectedEmployees");
+         var deleteButton = document.getElementById("deleteButton");
+        
+         var checked = false;
+         for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    checked = true;
+                    break;
+                }
+            }
+
+        if (checked) {
+                deleteButton.removeAttribute("disabled");
+            } else {
+                deleteButton.setAttribute("disabled", "true");
+            }
+      }
+
+    	// チェックボックスの状態が変化したときにtoggleButton関数を呼び出す
+        var checkboxes = document.getElementsByName("selectedEmployees");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener("change", toggleButton);
+        }
+        
+	</script>
+		<button type="submit" id="deleteButton" class="btn btn-danger delete_css" disabled>削除</button>
+	
 	</div>
+
+		
+	</form>
+		
 </body>
 </html>

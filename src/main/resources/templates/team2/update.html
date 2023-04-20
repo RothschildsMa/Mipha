@@ -77,12 +77,14 @@
 
 		<dl>
 			<dt>社員ID<label class="required"></label></dt>
-			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required/></input></dd>
+			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" style="color: gray;" readonly required/></input></dd>
 		
 
 			<dt>氏名漢字</dt>
 			<dd><input type="text" th:field="*{employeeName}" name="氏名漢字" size="20"  placeholder="山田太郎（最大20文字）" maxlength="20"/></input></dd>
 		 
+		 	<dt>入社年月日</dt>
+			<dd><input type="text" th:field="*{joinDate}" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください"></dd>
 		
 			<dt>氏名カナ</dt>
 			<dd><input type="text" th:field="*{employeeNameKana}" name="氏名カナ" size="20"  placeholder="ヤマダタロウ（最大60文字）" maxlength="60"/></input></dd>

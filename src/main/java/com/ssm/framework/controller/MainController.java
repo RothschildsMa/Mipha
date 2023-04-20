@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,11 +40,11 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
-	public String disPlay(LoginForm loginForm, Model model) {
+	public String check(LoginForm loginForm, Model model) {
 
-		 Employee emp = loginService.checkId(loginForm);
-		 
-		 if (emp == null) {
+		Employee emp = loginService.checkId(loginForm);
+
+		if (emp == null) {
 			return "redirect:/login";
 	    }else{
 			return "redirect:/emp/info";
@@ -63,27 +65,34 @@ public class MainController {
 	public String employeeInformation(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
+		//model.addAttribute("selectedId",new ArrayList<String>());
 		model.addAttribute("updateForm", new UpdateForm());
+		
+		
 		return "team2/emp2";
 	}
 
 	//社員情報登録画面
 	@GetMapping(value = "/emp/add")
-	public String displayAdd(Model model) {
+	public String addView(Model model) {
 		model.addAttribute("form", new UpdateForm());
 		return "team2/register2";
 	}
 
 	//社員情報登録処理
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
-	public String addToTable(UpdateForm updateForm) {
-		// 社員情報の登録
-		employeeService.add(updateForm); //情報挿入
+	public String addToTable(@ModelAttribute("form") @Validated UpdateForm updateForm, BindingResult bindingResult,
+			Model model) {
+		if (bindingResult.hasErrors()) {
+			return "emp2";
+		}
+
+//		employeeService.add(updateForm); //情報挿入
 		return "redirect:/emp/info"; //リダイレクト
 	}
 
 	@GetMapping("/emp/{id}/update")
-	public String displayEdit(@PathVariable String id, Model model) {
+	public String updateView(@PathVariable String id, Model model) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -94,6 +103,7 @@ public class MainController {
 		// updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
 
 		updateForm.setEmployeeName(emp.getEmployeeName());
+		updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
 		updateForm.setEmployeeNameKana(emp.getEmployeeNameKana());
 		updateForm.setEmployeeGenderId(emp.getEmployeeGenderId());
 		updateForm.setEmployeeAge(emp.getEmployeeAge());
@@ -121,24 +131,45 @@ public class MainController {
 
 	//削除フラグ用
 	@PostMapping("/deleteEmployees")
-	public String deleteEmployees(@RequestParam("employeeIds") String[] employeeIds) {
-		for (String employeeId : employeeIds) {
-			employeeService.updateDeletedFlag(employeeId);
+	public String deleteEmployees(@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
+		if(!selectedEmployees.isEmpty()) {
+			for (int id : selectedEmployees) {
+				employeeService.deleteEmployees(id);
+			}
 		}
-		return "redirect://employee/search";
+		return "redirect:/emp/info";
 	}
 
 	@GetMapping(value = "/employee/view")
 	public String showList2(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
+		model.addAttribute("employeeDepatmentInput", 003);
 		return "team2/employInformationDisplay";
 	}
 
 	@GetMapping(value = "/employee/employInformationDisplay")
-	public String showList2(Model model, UpdateForm form) {
+	public String showList2(Model model, UpdateForm form,
+			@RequestParam("employeeId") String employeeInput,
+			@RequestParam("employeeDepatmentId") int employeeDepatmentInput,
+			@RequestParam("startDate") String startDateInput,
+			@RequestParam("endDate") String endDateInput) {
+		String strDt = form.getStartDate();
+		String endDt = form.getEndDate();
+		form.setStartDate(strDt);
+		form.setEndDate(endDt);
+		model.addAttribute("employeeInput", employeeInput);
+		model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
+		model.addAttribute("startDateInput", startDateInput);
+		model.addAttribute("endDateInput", endDateInput);
 		List<Employee> empList = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", empList);
 		return "team2/employInformationDisplay";
 	}
+	//ログアウト用
+	 @GetMapping("/logout")
+	 public String logout(Model model) {
+	  
+	     return "redirect:/login";
+	 }
 }
