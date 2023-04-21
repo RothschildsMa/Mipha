@@ -9,8 +9,8 @@
     <select id="findAll" resultType="com.ssm.framework.entity.Employee">    
         SELECT t1.*, t2.CODE_NAME as DEPATMENT_NAME, t3.CODE_NAME as GENDER_NAME
 			FROM T_employee t1
-			INNER JOIN m_code t2 ON t1.EMPLOYEE_DEPATMENTID = t2.CODE_ID and t2.CODE_KBN = '0001'
-			INNER JOIN m_code t3 ON t1.EMPLOYEE_GENDERID = t3.CODE_ID and t3.CODE_KBN = '0002'
+			LEFT JOIN m_code t2 ON t1.EMPLOYEE_DEPATMENTID = t2.CODE_ID and t2.CODE_KBN = '0001'
+			LEFT JOIN m_code t3 ON t1.EMPLOYEE_GENDERID = t3.CODE_ID and t3.CODE_KBN = '0002'
 			WHERE t1.DEL_FLG =0;
     </select>
     
@@ -22,9 +22,10 @@
     <select id="iFindByCondition" resultType="com.ssm.framework.entity.Employee">
         SELECT t1.*, t2.CODE_NAME as DEPATMENT_NAME, t3.CODE_NAME as GENDER_NAME
 			FROM T_employee t1
-			INNER JOIN m_code t2 ON t1.EMPLOYEE_DEPATMENTID = t2.CODE_ID and t2.CODE_KBN = '0001'
-			INNER JOIN m_code t3 ON t1.EMPLOYEE_GENDERID = t3.CODE_ID and t3.CODE_KBN = '0002'
+			LEFT JOIN m_code t2 ON t1.EMPLOYEE_DEPATMENTID = t2.CODE_ID and t2.CODE_KBN = '0001'
+			LEFT JOIN m_code t3 ON t1.EMPLOYEE_GENDERID = t3.CODE_ID and t3.CODE_KBN = '0002'
 		  <where>
+		  	AND t1.DEL_FLG = 0
 		    <if test="employeeId != null and employeeId != ''">
 		      AND t1.EMPLOYEE_ID = #{employeeId}
 		    </if>
@@ -37,7 +38,6 @@
             <if test="endDate !=null and endDate !=''">
                 and t1.JOIN_DATE &lt;= #{endDate}
             </if>
-            AND t1.DEL_FLG = 0
 		  </where>
     </select>
     
@@ -56,7 +56,7 @@
 	  EMPLOYEE_NAME = #{employeeName}, JOIN_DATE = #{joinDate},EMPLOYEE_NAMEKANA = #{employeeNameKana}, 
 	  EMPLOYEE_GENDERID = #{employeeGenderId}, EMPLOYEE_AGE = #{employeeAge}, EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}, 
 	  EMPLOYEE_PHONENUMBER = #{employeePhoneNumber}, EMPLOYEE_MAIL = #{employeeMail}
-	  WHERE EMPLOYEE_ID = #{employeeId}
+	  WHERE EMPLOYEE_ID = #{employeeId} AND DEL_FLG = 0
 	</update>
 	
 	<!-- 削除 -->
