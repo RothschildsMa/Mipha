@@ -142,7 +142,7 @@ public class MainController {
 				employeeService.deleteEmployees(id);
 			}
 		}
-		return "redirect:/emp/info";
+		return "redirect:/employee/view";
 	}
 
 	@GetMapping(value = "/employee/view")
