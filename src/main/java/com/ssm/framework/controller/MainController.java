@@ -129,6 +129,7 @@ public class MainController {
 		updateForm.setEmployeeNameKana(emp.getEmployeeNameKana());
 		updateForm.setEmployeeGenderId(emp.getEmployeeGenderId());
 		updateForm.setEmployeeAge(emp.getEmployeeAge());
+		updateForm.setEmployeeDepatmentId(emp.getEmployeeDepatmentId());
 		updateForm.setEmployeePhoneNumber(emp.getEmployeePhoneNumber());
 		updateForm.setEmployeeMail(emp.getEmployeeMail());
 		model.addAttribute("updateForm", updateForm);
