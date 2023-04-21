@@ -1,4 +1,4 @@
-package com.ssm.framework.entity;
+package com.ssm.framework.form;
 
 import java.io.Serializable;
 import java.util.Date;
