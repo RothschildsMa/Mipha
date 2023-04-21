@@ -9,7 +9,7 @@ import lombok.Data;
 public class Employee implements Serializable{
 	
 	
-	//自動採番IDSerializable
+	//自動採番ID
 	private int id;
 	
 	//社員ID

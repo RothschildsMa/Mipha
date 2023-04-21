@@ -2,8 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link rel="stylesheet" type="text/css" href="/employInformationDisplay.css">
-	<title>社员信息管理系统</title>
+	<title>社員情報管理システム</title>
 </head>
+
+    <script>
+      function deleteData() {
+        // 获取checkbox元素
+        var checkboxes = document.getElementsByName("selectedEmployees");
+        // 检查checkbox是否选中
+        var checked = false;
+        for(var i = 0; i < checkboxes.length; i++){
+			if (checkboxes[i].checked) {
+				checked = true;
+         		
+          		break;
+        	}
+		}
+		
+		if (checked) {
+            return;
+        } else {
+			alert("削除する社員を選択してください。");
+			event.preventDefault(); //submitキャンセル
+        }
+
+      }
+      
+      
+    </script>
+    
 <body>
 	<div class="header">
   <h1 class="header_css">株式会社ＸＸＸ</h1>
@@ -19,7 +46,7 @@
 	
 	<form th:action="@{/employee/employInformationDisplay}" method="get">
 		<div class="firstSelectRow_css">
-			<label for="member-id" class="label1">社员ID:</label>
+			<label for="member-id" class="label1">社員ID:</label>
 			<input type="text" name="employeeId" class="input1" th:value="${employeeInput}"><br><br>
 			<label for="department" class="label2">所属部门:</label>
 			<select id="department" class="select1" name = "employeeDepatmentId">
@@ -40,25 +67,28 @@
 		</div>
 		
 	</form>
-	
+	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm" >
 	<div class="table-container">
 	<table>
 	<tbody>
 		<tr class="trFirst_css">
-			<th>选择</th>
+			<th>選択</th>
 			<th>社員ID</th>
 			<th>入社年月日</th>
 			<th>氏名</th>
 			<th>カタカナ</th>
-			<th>性别</th>
+			<th>性別</th>
 			<th>年齢</th>
 			<th>所属</th>
 			<th>電話番号</th>
 			<th>メールアドレス</th>
 		</tr>
 		
-		<tr th:each="employee : ${employeeList}" th:object="${employee}">
-		     <td><input type="checkbox" th:name="ids[]" th:value="${employee.id}"></td>
+		<tr th:each="employee, status : ${employeeList}" th:object="${employee}">
+		    <td><input type="checkbox" th:checked="${employee.checked}" 
+             th:name="selectedEmployees" 
+             th:value="${employee.id}" 
+             th:id="${'selectedEmployees_' + status.index + '_checked'}"></td>
              <td><a th:href="@{/emp/{id}/update(id=*{employeeId})}" th:text="*{employeeId}"></a></td>
              <td th:text="${#dates.format(employee.joinDate, 'yyyy/MM/dd')}"></td>
              <td th:text="*{employeeName}"></td>
@@ -71,11 +101,13 @@
            </tr>
            </tbody>
 	</table>
-	<div>
 	
-	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm" >
-		<button type="submit" class="delete_css">削除</button>
-		<input type="hidden" th:name="ids" th:value="${ids}" />
+	
+	</div>
+	
+	
+		<button type="submit"id="deleteButton" class="delete_css" onclick="deleteData()">削除</button>
+		
 	</form>
 </body>
 </html>
