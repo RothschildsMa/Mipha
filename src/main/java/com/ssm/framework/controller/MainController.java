@@ -27,16 +27,23 @@ public class MainController {
 	private EmployeeService employeeService;
 	@Autowired
 	private LoginService loginService;
+	
+	//debugリスト表示
+	/*@GetMapping(value = "/employee/list")
+	public String showList(Model model) {
+		List<Employee> empList = employeeService.findAll();
+		model.addAttribute("employeeList", empList);
+		return "output";
+	}*/
 
+	//開始画面
 	@GetMapping("login")
 	public String loginView(Model model) {
-		//LoginForm loginForm = new LoginForm();
-
 		model.addAttribute("loginForm", new LoginForm());
 		return "team1/Login";
-
 	}
 
+	//ID Passwordチェック処理
 	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
 	public String check(LoginForm loginForm, Model model) {
 
@@ -45,30 +52,41 @@ public class MainController {
 		if (emp == null) {
 			return "redirect:/login";
 	    }else{
-			return "redirect:/emp/info";
+			return "redirect:/employee/view";
 				
 		}
 
 	}
-	//debugリスト表示
-	@GetMapping(value = "/employee/list")
-	public String showList(Model model) {
+	
+	//社員情報一覧画面
+	@GetMapping(value = "/employee/view")
+	public String showList2(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
-		return "output";
+		model.addAttribute("employeeDepatmentInput", 003);
+		return "team2/employInformationDisplay";
 	}
 
-	//社員情報一覧画面
-	@GetMapping(value = "/emp/info")
-	public String employeeInformation(Model model) {
-		List<Employee> empList = employeeService.findAll();
+	//社員情報検索処理
+	@GetMapping(value = "/employee/employInformationDisplay")
+	public String showList2(Model model, UpdateForm form,
+			@RequestParam("employeeId") String employeeInput,
+			@RequestParam("employeeDepatmentId") int employeeDepatmentInput,
+			@RequestParam("startDate") String startDateInput,
+			@RequestParam("endDate") String endDateInput) {
+		String strDt = form.getStartDate();
+		String endDt = form.getEndDate();
+		form.setStartDate(strDt);
+		form.setEndDate(endDt);
+		model.addAttribute("employeeInput", employeeInput);
+		model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
+		model.addAttribute("startDateInput", startDateInput);
+		model.addAttribute("endDateInput", endDateInput);
+		List<Employee> empList = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", empList);
-		//model.addAttribute("selectedId",new ArrayList<String>());
-		model.addAttribute("updateForm", new UpdateForm());
-		
-		
-		return "team2/emp2";
+		return "team2/employInformationDisplay";
 	}
+	
 
 	//社員情報登録画面
 	@GetMapping(value = "/emp/add")
@@ -93,9 +111,10 @@ public class MainController {
 			return "team2/addFaild";
 		}
 		
-		return "redirect:/emp/info"; //リダイレクト
+		return "redirect:/employee/view";
 	}
 
+	//社員情報更新画面
 	@GetMapping("/emp/{id}/update")
 	public String updateView(@PathVariable String id, Model model) {
 
@@ -105,8 +124,6 @@ public class MainController {
 		UpdateForm updateForm = new UpdateForm();
 
 		updateForm.setEmployeeId(emp.getEmployeeId());
-		// updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
-
 		updateForm.setEmployeeName(emp.getEmployeeName());
 		updateForm.setJoinDate(sdf.format(emp.getJoinDate()));
 		updateForm.setEmployeeNameKana(emp.getEmployeeNameKana());
@@ -118,23 +135,16 @@ public class MainController {
 		return "team2/update";
 	}
 
+	//社員情報更新処理
 	@RequestMapping(value = "/emp/update", method = RequestMethod.POST)
 	public String updateToTabel(@ModelAttribute UpdateForm updateForm) {
 		// 社員情報の更新
 		employeeService.update(updateForm); //情報更新
-		return "redirect:/emp/info"; //リダイレクト
+		return "redirect:/employee/view"; 
 	}
 
-	//条件検索 完成(社員ID) 未完成(所属ID、入社年月日範囲チェック)
-	@RequestMapping(value = "/employee/search", method = RequestMethod.POST)
-	public String getEmployeesByCondition(Model model, UpdateForm updateForm) {
-		List<Employee> employees = employeeService.findByCondition(updateForm);
-		model.addAttribute("employeeList", employees);
-		return "team2/emp2";
 
-	}
-
-	//削除フラグ用
+	//社員情報削除処理
 	@PostMapping("/deleteEmployees")
 	public String deleteEmployees(@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
 		if(!selectedEmployees.isEmpty()) {
@@ -145,32 +155,7 @@ public class MainController {
 		return "redirect:/employee/view";
 	}
 
-	@GetMapping(value = "/employee/view")
-	public String showList2(Model model) {
-		List<Employee> empList = employeeService.findAll();
-		model.addAttribute("employeeList", empList);
-		model.addAttribute("employeeDepatmentInput", 003);
-		return "team2/employInformationDisplay";
-	}
-
-	@GetMapping(value = "/employee/employInformationDisplay")
-	public String showList2(Model model, UpdateForm form,
-			@RequestParam("employeeId") String employeeInput,
-			@RequestParam("employeeDepatmentId") int employeeDepatmentInput,
-			@RequestParam("startDate") String startDateInput,
-			@RequestParam("endDate") String endDateInput) {
-		String strDt = form.getStartDate();
-		String endDt = form.getEndDate();
-		form.setStartDate(strDt);
-		form.setEndDate(endDt);
-		model.addAttribute("employeeInput", employeeInput);
-		model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
-		model.addAttribute("startDateInput", startDateInput);
-		model.addAttribute("endDateInput", endDateInput);
-		List<Employee> empList = employeeService.findByCondition(form);
-		model.addAttribute("employeeList", empList);
-		return "team2/employInformationDisplay";
-	}
+	
 	//ログアウト用
 	 @GetMapping("/logout")
 	 public String logout(Model model) {
