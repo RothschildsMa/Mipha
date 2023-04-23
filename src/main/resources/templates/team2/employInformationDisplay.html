@@ -2,49 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link rel="stylesheet" type="text/css" href="/employInformationDisplay.css">
+	<script src="/js/urlManager.js"></script>
 	<title>社員情報管理システム</title>
 </head>
 
     <script>
       function deleteData() {
-        // 获取checkbox元素
         var checkboxes = document.getElementsByName("selectedEmployees");
-        // 检查checkbox是否选中
         var checked = false;
         for(var i = 0; i < checkboxes.length; i++){
 			if (checkboxes[i].checked) {
 				checked = true;
-         		
           		break;
         	}
 		}
 		
 		if (checked) {
-            return;
+			
+            submitForm('selectForm','delete','post');
+            window.history.go(-1);
+            location.reload();
+            
         } else {
 			alert("削除する社員を選択してください。");
 			event.preventDefault(); //submitキャンセル
         }
-
       }
-      
-      
     </script>
     
 <body>
 	<div class="header">
-  <h1 class="header_css">株式会社ＸＸＸ</h1>
-  <!-- ログアウトフォーム -->
-  <form th:action="@{/logout}" >
-    <button type="submit" class="logout_css">ログアウト</button>
-  </form>
-</div>
-	
-	<form th:action="@{/emp/add}">
-		<button id="loginBtn" class="loginBtu_css">登録</button>
-	</form>
-	
-	<form th:action="@{/employee/employInformationDisplay}" method="get">
+  		<h1 class="header_css">株式会社ＸＸＸ</h1>
+
+
+	</div>
+
+	<form id="selectForm">
 		<div class="firstSelectRow_css">
 			<label for="member-id" class="label1">社員ID:</label>
 			<input type="text" name="employeeId" class="input1" th:value="${employeeInput}"><br><br>
@@ -57,7 +50,10 @@
 				<option value="005" th:text="第ニ開発部" th:selected="${employeeDepatmentInput == 005}"></option>
 				<option value="006" th:text="人事部" th:selected="${employeeDepatmentInput == 006}"></option>
 			</select><br><br>
-			<button id="searchBtn" type="submit" class="searchBtu_css">検索</button>
+			<button type="submit" class="logout_css" onclick="submitForm('selectForm','logout')">ログアウト</button>
+			<button id="loginBtn" class="loginBtu_css" onclick="submitForm('selectForm','add')">登録</button>
+			<button id="searchBtn" type="submit" class="searchBtu_css" 
+			onclick="submitForm('selectForm','home','get')">検索</button>
 		</div>
 		<div class="twoSelectRow_css">
 			<label for="start-date" class="label3">入社年月日:</label>
@@ -65,9 +61,7 @@
 			<p class="p2">~</p>
 			<input type="date" id="end-date" name="endDate"class="timeEnd" th:value="${endDateInput}"><br><br>
 		</div>
-		
-	</form>
-	<form th:action="@{/deleteEmployees}" th:method="post" id="deleteForm" >
+
 	<div class="table-container">
 	<table>
 	<tbody>
@@ -106,7 +100,7 @@
 	</div>
 	
 	
-		<button type="submit"id="deleteButton" class="delete_css" onclick="deleteData()">削除</button>
+		<button type="submit" class="delete_css" onclick="deleteData()">削除</button>
 		
 	</form>
 </body>

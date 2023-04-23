@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <script src="/js/urlManager.js"></script>
   <title>ログイン画面</title>
     <style>
     body {
@@ -56,7 +57,7 @@
 </head>
 <body>
   <h1>ログイン画面</h1>
-  <form  th:action="@{/emp/login}" th:object="${loginForm}" method="post">
+  <form  th:action="@{/emp/login}" th:object="${loginForm}">
     <label for="employee-id">社員ID:</label>
     <input type="text" th:field="*{employeeId}" id="employee-id" name="employee-id" pattern="^[0-9A-Z]+$" size="20" placeholder="NTS0000000（10桁）" maxlength="10" required>
     <label for="password">パスワード:</label>

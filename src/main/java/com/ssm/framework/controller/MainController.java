@@ -66,7 +66,7 @@ public class MainController {
 	
 	//社員情報一覧画面
 	@GetMapping(value = "/employee/view")
-	public String showList2(Model model) {
+	public String homeView(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
 		model.addAttribute("employeeDepatmentInput", 003);
@@ -75,7 +75,7 @@ public class MainController {
 
 	//社員情報検索処理
 	@GetMapping(value = "/employee/employInformationDisplay")
-	public String showList2(Model model, UpdateForm form,
+	public String searchView(Model model, UpdateForm form,
 			@RequestParam("employeeId") String employeeInput,
 			@RequestParam("employeeDepatmentId") int employeeDepatmentInput,
 			@RequestParam("startDate") String startDateInput,
@@ -159,7 +159,7 @@ public class MainController {
 				employeeService.deleteEmployees(id);
 			}
 		}
-		return "redirect:/employee/view";
+		return "team2/deleteSuccess";
 	}
 
 	
