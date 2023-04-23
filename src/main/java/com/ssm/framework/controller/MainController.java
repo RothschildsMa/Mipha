@@ -39,7 +39,7 @@ public class MainController {
 		return "output";
 	}*/
 
-
+	//AOP
 	//開始画面
 	@GetMapping("login")
 	public String loginView(Model model) {
@@ -58,13 +58,8 @@ public class MainController {
 			error = true;
 			return "redirect:/login";
 	    }else{
-
 	    	error = false;
-	
-
 			return "redirect:/employee/view";
-
-				
 		}
 
 	}

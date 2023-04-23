@@ -25,7 +25,7 @@
 			LEFT JOIN m_code t2 ON t1.EMPLOYEE_DEPATMENTID = t2.CODE_ID and t2.CODE_KBN = '0001'
 			LEFT JOIN m_code t3 ON t1.EMPLOYEE_GENDERID = t3.CODE_ID and t3.CODE_KBN = '0002'
 		  <where>
-		  	AND t1.DEL_FLG = 0
+		  	t1.DEL_FLG = 0
 		    <if test="employeeId != null and employeeId != ''">
 		      AND t1.EMPLOYEE_ID = #{employeeId}
 		    </if>
