@@ -159,6 +159,7 @@ public class MainController {
 				employeeService.deleteEmployees(id);
 			}
 		}
+		//return "redirect:/employee/employInformationDisplay";
 		return "team2/deleteSuccess";
 	}
 
