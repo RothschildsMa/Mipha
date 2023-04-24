@@ -85,7 +85,11 @@ public class MainController {
 		form.setStartDate(strDt);
 		form.setEndDate(endDt);
 		model.addAttribute("employeeInput", employeeInput);
-		model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
+		if(employeeDepatmentInput == 000) {
+			form.setEmployeeDepatmentId(null);
+		}else {
+			model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
+		}
 		model.addAttribute("startDateInput", startDateInput);
 		model.addAttribute("endDateInput", endDateInput);
 		List<Employee> empList = employeeService.findByCondition(form);
