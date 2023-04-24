@@ -69,7 +69,7 @@ public class MainController {
 	public String homeView(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
-		model.addAttribute("employeeDepatmentInput", 003);
+		model.addAttribute("employeeDepatmentInput", 001);
 		return "team2/employInformationDisplay";
 	}
 
