@@ -18,10 +18,12 @@
 		}
 		
 		if (checked) {
-			
-            submitForm('selectForm','delete','post');
-			location.reload();
-            
+			if(confirm("選択した社員情報一覧を削除してもよろしいですか。")){
+				submitForm('selectForm','delete','post');
+				 <!-- location.reload(); -->
+			}else{
+				event.preventDefault(); //submitキャンセル
+			}
         } else {
 			alert("削除する社員を選択してください。");
 			event.preventDefault(); //submitキャンセル

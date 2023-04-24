@@ -75,23 +75,21 @@ public class MainController {
 
 	//社員情報検索処理
 	@GetMapping(value = "/employee/employInformationDisplay")
-	public String searchView(Model model, UpdateForm form,
-			@RequestParam("employeeId") String employeeInput,
-			@RequestParam("employeeDepatmentId") int employeeDepatmentInput,
-			@RequestParam("startDate") String startDateInput,
-			@RequestParam("endDate") String endDateInput) {
+	public String searchView(Model model, UpdateForm form) {
 		String strDt = form.getStartDate();
 		String endDt = form.getEndDate();
 		form.setStartDate(strDt);
 		form.setEndDate(endDt);
-		model.addAttribute("employeeInput", employeeInput);
-		if(employeeDepatmentInput == 000) {
+		model.addAttribute("employeeInput", form.getEmployeeId());
+		Integer iEmployeeDepatmentId = Integer.parseInt(form.getEmployeeDepatmentId());
+		if (iEmployeeDepatmentId == 000 ) {
 			form.setEmployeeDepatmentId(null);
-		}else {
-			model.addAttribute("employeeDepatmentInput", employeeDepatmentInput);
+		}else{
+			model.addAttribute("employeeDepatmentInput", iEmployeeDepatmentId);
 		}
-		model.addAttribute("startDateInput", startDateInput);
-		model.addAttribute("endDateInput", endDateInput);
+		
+		model.addAttribute("startDateInput", form.getStartDate());
+		model.addAttribute("endDateInput", form.getEndDate());
 		List<Employee> empList = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", empList);
 		return "team2/employInformationDisplay";
@@ -157,14 +155,30 @@ public class MainController {
 
 	//社員情報削除処理
 	@PostMapping("/deleteEmployees")
-	public String deleteEmployees(@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
+	public String deleteEmployees(Model model, UpdateForm form,@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
 		if(!selectedEmployees.isEmpty()) {
 			for (int id : selectedEmployees) {
 				employeeService.deleteEmployees(id);
 			}
 		}
+		String strDt = form.getStartDate();
+		String endDt = form.getEndDate();
+		form.setStartDate(strDt);
+		form.setEndDate(endDt);
+		model.addAttribute("employeeInput", form.getEmployeeId());
+		Integer iEmployeeDepatmentId = Integer.parseInt(form.getEmployeeDepatmentId());
+		if (iEmployeeDepatmentId == 000 ) {
+			form.setEmployeeDepatmentId(null);
+		}else{
+			model.addAttribute("employeeDepatmentInput", iEmployeeDepatmentId);
+		}
+		
+		model.addAttribute("startDateInput", form.getStartDate());
+		model.addAttribute("endDateInput", form.getEndDate());
+		List<Employee> empList = employeeService.findByCondition(form);
+		model.addAttribute("employeeList", empList);
 		//return "redirect:/employee/employInformationDisplay";
-		return "team2/deleteSuccess";
+		return "team2/employInformationDisplay";
 	}
 
 	
