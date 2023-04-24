@@ -42,6 +42,7 @@
 			<input type="text" name="employeeId" class="input1" th:value="${employeeInput}"><br><br>
 			<label for="department" class="label2">所属部门:</label>
 			<select id="department" class="select1" name = "employeeDepatmentId">
+				<option value="">--请选择--</option>
 				<option value="001" th:text="所属不明" th:selected="${employeeDepatmentInput == 001}"></option>
 				<option value="002" th:text="管理部" th:selected="${employeeDepatmentInput == 002}"></option>
 				<option value="003" th:text="営業部" th:selected="${employeeDepatmentInput == 003}"></option>
