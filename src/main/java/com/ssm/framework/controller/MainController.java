@@ -29,8 +29,6 @@ public class MainController {
 	private LoginService loginService;
 
 	private boolean error=false;
-
-	
 	//debugリスト表示
 	/*@GetMapping(value = "/employee/list")
 	public String showList(Model model) {
@@ -53,7 +51,6 @@ public class MainController {
 	public String check(LoginForm loginForm, Model model) {
 
 		Employee emp = loginService.checkId(loginForm);
-
 		if (emp == null) {
 			error = true;
 			return "redirect:/login";
@@ -61,7 +58,6 @@ public class MainController {
 	    	error = false;
 			return "redirect:/employee/view";
 		}
-
 	}
 	
 	//社員情報一覧画面
@@ -140,6 +136,7 @@ public class MainController {
 		updateForm.setEmployeeDepatmentId(emp.getEmployeeDepatmentId());
 		updateForm.setEmployeePhoneNumber(emp.getEmployeePhoneNumber());
 		updateForm.setEmployeeMail(emp.getEmployeeMail());
+		updateForm.setUpdateUser(emp.getEmployeeId());
 		model.addAttribute("updateForm", updateForm);
 		return "team2/update";
 	}
@@ -155,10 +152,11 @@ public class MainController {
 
 	//社員情報削除処理
 	@PostMapping("/deleteEmployees")
-	public String deleteEmployees(Model model, UpdateForm form,@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
+	public String deleteEmployees(Model model, UpdateForm form,LoginForm loginForm,@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
+		String loginEmployee = loginForm.getEmployeeId();
 		if(!selectedEmployees.isEmpty()) {
 			for (int id : selectedEmployees) {
-				employeeService.deleteEmployees(id);
+				employeeService.deleteEmployees(id,loginEmployee);
 			}
 		}
 		String strDt = form.getStartDate();

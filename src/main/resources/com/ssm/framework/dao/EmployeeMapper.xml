@@ -55,13 +55,13 @@
 	  UPDATE T_employee SET
 	  EMPLOYEE_NAME = #{employeeName}, JOIN_DATE = #{joinDate},EMPLOYEE_NAMEKANA = #{employeeNameKana}, 
 	  EMPLOYEE_GENDERID = #{employeeGenderId}, EMPLOYEE_AGE = #{employeeAge}, EMPLOYEE_DEPATMENTID = #{employeeDepatmentId}, 
-	  EMPLOYEE_PHONENUMBER = #{employeePhoneNumber}, EMPLOYEE_MAIL = #{employeeMail}
+	  EMPLOYEE_PHONENUMBER = #{employeePhoneNumber}, EMPLOYEE_MAIL = #{employeeMail},UPDATE_DATE = sysdate()
 	  WHERE EMPLOYEE_ID = #{employeeId} AND DEL_FLG = 0
 	</update>
 	
 	<!-- 削除 -->
 	<update id="deleteEmployees">
-    UPDATE T_employee SET DEL_FLG = 1 WHERE ID = #{id}
+    UPDATE T_employee SET DEL_FLG = 1,UPDATE_USER = #{loginEmployee},UPDATE_DATE = sysdate() WHERE ID = #{id}
   </update>
   
    <!-- 最大IDのデータ-->
@@ -69,4 +69,8 @@
    SELECT * FROM T_employee ORDER BY ID DESC LIMIT 1;
    </select>
    
+   <!-- allDepatmentName -->
+   <select id = 'iFindDepatmentName' resultType="com.ssm.framework.entity.MCode">
+   select * from m_code  where CODE_KBN = "0001";
+   </select>
 </mapper>

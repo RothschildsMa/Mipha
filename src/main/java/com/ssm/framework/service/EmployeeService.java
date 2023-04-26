@@ -48,8 +48,8 @@ public class EmployeeService {
 	}
 
 	//削除フラグ
-	public void deleteEmployees(int id) {
-		employeeMapper.deleteEmployees(id);
+	public void deleteEmployees(int id,String loginEmployee) {
+		employeeMapper.deleteEmployees(id,loginEmployee);
 	}
 
 

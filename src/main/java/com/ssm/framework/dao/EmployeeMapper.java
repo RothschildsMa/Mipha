@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssm.framework.entity.Employee;
+import com.ssm.framework.entity.MCode;
 import com.ssm.framework.form.UpdateForm;
 
 @Mapper
@@ -22,7 +23,9 @@ public interface EmployeeMapper {
 	List<Employee> iFindByCondition(UpdateForm form);
 
 	//削除フラグ用
-	void deleteEmployees(int id);
+	void deleteEmployees(int id,String loginEmployee);
 	
 	Employee iFindMaxIdOfEmployee();
+	
+	List<MCode> iFindDepatmentName();
 }
