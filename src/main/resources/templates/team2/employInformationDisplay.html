@@ -45,12 +45,11 @@
 			<label for="department" class="label2">所属部门:</label>
 			<select id="department" class="select1" name = "employeeDepatmentId">
 				<option value="000">--選択してください--</option>
-				<option value="001" th:text="所属不明" th:selected="${employeeDepatmentInput == 001}"></option>
-				<option value="002" th:text="管理部" th:selected="${employeeDepatmentInput == 002}"></option>
-				<option value="003" th:text="営業部" th:selected="${employeeDepatmentInput == 003}"></option>
-				<option value="004" th:text="第一開発部" th:selected="${employeeDepatmentInput == 004}"></option>
-				<option value="005" th:text="第ニ開発部" th:selected="${employeeDepatmentInput == 005}"></option>
-				<option value="006" th:text="人事部" th:selected="${employeeDepatmentInput == 006}"></option>
+				<option th:each="department : ${departmentList}"
+				th:value="${department.codeId}" 
+				th:text="${department.codeName}" 
+				th:selected="${department.codeId == employeeDepatmentInput}">
+				></option>
 			</select><br><br>
 			<button type="submit" class="logout_css" onclick="submitForm('selectForm','logout')">ログアウト</button>
 			<button id="loginBtn" class="loginBtu_css" onclick="submitForm('selectForm','add')">登録</button>

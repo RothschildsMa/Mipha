@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssm.framework.dao.EmployeeMapper;
 import com.ssm.framework.entity.Employee;
+import com.ssm.framework.entity.MCode;
 import com.ssm.framework.form.UpdateForm;
 
 @Service
@@ -60,6 +61,10 @@ public class EmployeeService {
 	
 	public Employee findMaxIdOfEmployee() {
 		return employeeMapper.iFindMaxIdOfEmployee();
+	}
+	
+	public List<MCode> FindDepatmentName(){
+		return employeeMapper.iFindDepatmentName();
 	}
 
 }

@@ -69,7 +69,7 @@
    SELECT * FROM T_employee ORDER BY ID DESC LIMIT 1;
    </select>
    
-   <!-- allDepatmentName -->
+   <!-- iFindDepatmentName -->
    <select id = 'iFindDepatmentName' resultType="com.ssm.framework.entity.MCode">
    select * from m_code  where CODE_KBN = "0001";
    </select>

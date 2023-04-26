@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssm.framework.entity.Employee;
+import com.ssm.framework.entity.MCode;
 import com.ssm.framework.form.LoginForm;
 import com.ssm.framework.form.UpdateForm;
 import com.ssm.framework.service.EmployeeService;
@@ -29,6 +30,8 @@ public class MainController {
 	private LoginService loginService;
 
 	private boolean error=false;
+	
+	private List<MCode> departmentList ;
 	//debugリスト表示
 	/*@GetMapping(value = "/employee/list")
 	public String showList(Model model) {
@@ -65,7 +68,8 @@ public class MainController {
 	public String homeView(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
-//		model.addAttribute("employeeDepatmentInput", 001);
+		departmentList = employeeService.FindDepatmentName();
+		model.addAttribute("departmentList", departmentList);
 		return "team2/employInformationDisplay";
 	}
 
@@ -77,8 +81,9 @@ public class MainController {
 		form.setStartDate(strDt);
 		form.setEndDate(endDt);
 		model.addAttribute("employeeInput", form.getEmployeeId());
-		Integer iEmployeeDepatmentId = Integer.parseInt(form.getEmployeeDepatmentId());
-		if (iEmployeeDepatmentId == 000 ) {
+		String iEmployeeDepatmentId = form.getEmployeeDepatmentId();
+//		Integer iEmployeeDepatmentId = Integer.parseInt(form.getEmployeeDepatmentId());
+		if (iEmployeeDepatmentId.equals("000")) {
 			form.setEmployeeDepatmentId(null);
 		}else{
 			model.addAttribute("employeeDepatmentInput", iEmployeeDepatmentId);
@@ -88,6 +93,7 @@ public class MainController {
 		model.addAttribute("endDateInput", form.getEndDate());
 		List<Employee> empList = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", empList);
+		model.addAttribute("departmentList", departmentList);
 		return "team2/employInformationDisplay";
 	}
 	
@@ -175,6 +181,7 @@ public class MainController {
 		model.addAttribute("endDateInput", form.getEndDate());
 		List<Employee> empList = employeeService.findByCondition(form);
 		model.addAttribute("employeeList", empList);
+		model.addAttribute("departmentList", departmentList);
 		//return "redirect:/employee/employInformationDisplay";
 		return "team2/employInformationDisplay";
 	}
