@@ -59,7 +59,7 @@ public class MainController {
 			return "redirect:/employee/view";
 		}
 	}
-	
+
 	//社員情報一覧画面
 	@GetMapping(value = "/employee/view")
 	public String homeView(Model model) {
