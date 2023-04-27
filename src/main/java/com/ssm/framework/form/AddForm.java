@@ -1,5 +1,9 @@
 package com.ssm.framework.form;
 
+import java.time.LocalDate;
+
+import com.ssm.framework.validator.DateRange;
+
 import lombok.Data;
 
 @Data
@@ -10,9 +14,11 @@ public class AddForm {
 	//パスワード
 	private String password;
 	
+	//private String joinDate;
 	
 	//入社年月日
-	private String joinDate;
+	@DateRange(startDate = "2023-01-01", endDate = "2023-12-31")
+	private LocalDate joinDate;
 
 	//社員名称漢字
 	private String employeeName;
@@ -39,6 +45,6 @@ public class AddForm {
 
 	private String updateUser;
 
-
+	private String createUser;
 	
 }

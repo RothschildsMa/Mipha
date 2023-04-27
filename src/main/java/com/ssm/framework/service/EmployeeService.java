@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ssm.framework.dao.EmployeeMapper;
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.entity.MCode;
+import com.ssm.framework.form.AddForm;
 import com.ssm.framework.form.UpdateForm;
 
 @Service
@@ -35,7 +36,7 @@ public class EmployeeService {
 		}
 	}
 
-	public void add(UpdateForm form){
+	public void add(AddForm form){
 
 		// データベースに新しい社員を登録する
 		employeeMapper.add(form);

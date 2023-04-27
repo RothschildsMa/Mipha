@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.entity.MCode;
+import com.ssm.framework.form.AddForm;
 import com.ssm.framework.form.UpdateForm;
 
 @Mapper
@@ -16,7 +17,7 @@ public interface EmployeeMapper {
 
 	Employee linkId(String employeeId);
 
-	void add(UpdateForm form);
+	void add(AddForm form);
 
 	void update(UpdateForm form);
 
