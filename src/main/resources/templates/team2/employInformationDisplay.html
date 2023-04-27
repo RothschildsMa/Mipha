@@ -5,32 +5,6 @@
 	<script src="/js/urlManager.js"></script>
 	<title>社員情報管理システム</title>
 </head>
-
-    <script>
-      function deleteData() {
-        var checkboxes = document.getElementsByName("selectedEmployees");
-        var checked = false;
-        for(var i = 0; i < checkboxes.length; i++){
-			if (checkboxes[i].checked) {
-				checked = true;
-          		break;
-        	}
-		}
-		
-		if (checked) {
-			if(confirm("選択した社員情報一覧を削除してもよろしいですか。")){
-				submitForm('selectForm','delete','post');
-				 //<!-- location.reload(); -->
-			}else{
-				event.preventDefault(); //submitキャンセル
-			}
-        } else {
-			alert("削除する社員を選択してください。");
-			event.preventDefault(); //submitキャンセル
-        }
-      }
-    </script>
-    
 <body>
 	<div class="header">
   		<h1 class="header_css">株式会社ＸＸＸ</h1>
