@@ -2,10 +2,12 @@ package com.ssm.framework.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,8 @@ public class MainController {
 	private boolean error=false;
 	
 	private List<MCode> departmentList ;
+	
+	private LoginForm login;
 	//debugリスト表示
 	/*@GetMapping(value = "/employee/list")
 	public String showList(Model model) {
@@ -50,15 +54,17 @@ public class MainController {
 	}
 
 	//ID Passwordチェック処理
-	@RequestMapping(value = "/emp/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/emp/login")
 	public String check(LoginForm loginForm, Model model) {
-
+		String inputPassword = DigestUtils.md5DigestAsHex(loginForm.getPassword().getBytes());
+		loginForm.setPassword(inputPassword);
 		Employee emp = loginService.checkId(loginForm);
 		if (emp == null) {
 			error = true;
 			return "redirect:/login";
 	    }else{
 	    	error = false;
+	    	login = loginForm;
 			return "redirect:/employee/view";
 		}
 	}
@@ -115,6 +121,16 @@ public class MainController {
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
 	public String addToTable(UpdateForm updateForm) {
 		try {
+			
+			Random random = new Random();
+		    StringBuilder password = new StringBuilder();
+		    for (int i = 0; i < 6; i++) {
+		    	password.append(random.nextInt(10));
+		    }
+		    String encryptedPassword = DigestUtils.md5DigestAsHex(password.toString().getBytes());
+		    updateForm.setUpdateUser(password.toString());// パスワードを知るために、一時設定
+		    updateForm.setPassword(encryptedPassword);
+		    updateForm.setCreateUser(login.getEmployeeId().toString());
 			employeeService.add(updateForm); //情報挿入
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -142,7 +158,7 @@ public class MainController {
 		updateForm.setEmployeeDepatmentId(emp.getEmployeeDepatmentId());
 		updateForm.setEmployeePhoneNumber(emp.getEmployeePhoneNumber());
 		updateForm.setEmployeeMail(emp.getEmployeeMail());
-		updateForm.setUpdateUser(emp.getEmployeeId());
+		updateForm.setUpdateUser(login.getEmployeeId());
 		model.addAttribute("updateForm", updateForm);
 		return "team2/update";
 	}
@@ -159,7 +175,7 @@ public class MainController {
 	//社員情報削除処理
 	@PostMapping("/deleteEmployees")
 	public String deleteEmployees(Model model, UpdateForm form,LoginForm loginForm,@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
-		String loginEmployee = loginForm.getEmployeeId();
+		String loginEmployee = login.getEmployeeId();
 		if(!selectedEmployees.isEmpty()) {
 			for (int id : selectedEmployees) {
 				employeeService.deleteEmployees(id,loginEmployee);

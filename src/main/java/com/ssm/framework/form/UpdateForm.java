@@ -47,4 +47,5 @@ public class UpdateForm implements Serializable {
 	//入社年月日
 	private String endDate;
 
+	private String createUser;
 }
