@@ -10,6 +10,7 @@ public class AddForm {
 	//パスワード
 	private String password;
 	
+	
 	//入社年月日
 	private String joinDate;
 
