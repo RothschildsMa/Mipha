@@ -1,157 +1,188 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>社員情報登録画面</title>
-<style>
-	.登録フォーム {
-        font-family: arial;
-        font-size: 17px;
-        margin: 0px;
-        width: 557px;
-        height: 1000px;
-        margin: 0 auto;
-    }
-    
-    dl {
-		float: left;
-		width: 100%;  /*変えられない数値*/
-		border-right: 1px solid#dddddd;
-		border-bottom: 1px solid #dddddd;
-    }
-    dl dt {
-        float: left;
-        clear: left;
-        width: 40%;
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-        background: #dddddd;
-        padding: 4%;
-        margin-bottom: 0px;
-		border-top: 1px solid #FFFF;
-    }
-    dl dd {
-        float: left;
-        margin-left: 0px;
-		margin-right: 0px;
-        width:250px;
-        display: table-cell;
-        vertical-align: middle;
-        padding: 3.5%;
-        margin-bottom: 0px;
-        padding-left : 1.1em;
-		border-top: 1px solid #dddddd;
-    }
-    .required::after {
-        content: "必須";
-        background-color: #F06060;
-        color: #fff;
-        font-size: 13px;
-        font-weight: bold;
-        min-width: 10px;
-        padding: 4px 6px;
-        margin: 1px 8px;
-        line-height: 1;
-        vertical-align: middle;
-        white-space: nowrap;
-        text-align: left; 
-        border-radius: 10px;
-        display: inline; 
-    }
-	.box select{width: 140px;}
-	
-	.button{
-		height:40px;
-		width:100px;
-}
-	
+	<meta charset="UTF-8">
+	<title>社員情報登録画面</title>
+	<style>
+		.登録フォーム {
+			font-family: arial;
+			font-size: 17px;
+			margin: 0px;
+			width: 557px;
+			height: 1000px;
+			margin: 0 auto;
+		}
+
+		dl {
+			display: table;
+			table-layout: fixed;
+			width: 100%;
+			/*変えられない数値*/
+			border-right: 1px solid#dddddd;
+			border-bottom: 1px solid #dddddd;
+		}
+
+		dl dt {
+			display: table-cell;
+			float: left;
+			clear: left;
+			width: 40%;
+			height: 36px;
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+			text-align: center;
+			background: #dddddd;
+			padding: 4%;
+			margin-bottom: 0px;
+			border-top: 1px solid #FFFF;
+		}
+
+		dl dd {
+			display: table-cell;
+			float: left;
+			margin-left: 0px;
+			margin-right: 0px;
+			width: 250px;
+			height: 36px;
+			display: table-cell;
+			vertical-align: middle;
+			padding: 3.6%;
+			margin-bottom: 0px;
+			padding-left: 1.1em;
+			border-top: 1px solid #dddddd;
+		}
+
+		.required::after {
+			content: "自動採番";
+			background-color: #F06060;
+			color: #fff;
+			font-size: 13px;
+			font-weight: bold;
+			min-width: 10px;
+			padding: 4px 6px;
+			margin: 1px 8px;
+			line-height: 1;
+			vertical-align: middle;
+			white-space: nowrap;
+			text-align: left;
+			border-radius: 10px;
+			display: inline;
+		}
+
+		.box select {
+			width: 140px;
+		}
+
+		.button {
+			height: 40px;
+			width: 100px;
+		}
+
+		.error-message {
+			font-size: 13px;
+			color: red;
+		}
 	</style>
 </head>
+
 <body>
 
 	<div class="登録フォーム">
-	<h3>社員情報登録画面</h3>
+		<h3>社員情報登録画面</h3>
 
-  <form th:action="@{/emp/insert}" th:object="${addForm}" th:method="post"> 
- 
-		
-		<dl>
-			<dt>社員ID<label class="required"></label></dt>
-			<dd><input type="text" th:field="*{employeeId}" name="社員ID" style="color: gray;" readonly required/></input></dd>
-		
-			<dt>入社年月日</dt>
-			<dd>
-				<input type="text" th:field="*{joinDate}" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください">
-				<br><span th:if="${#fields.hasErrors('joinDate')}" th:errors="*{joinDate}"></span>
-			</dd>
-			
-			<dt>氏名漢字</dt>
-			<dd>
-				<input type="text" th:field="*{employeeName}" name="氏名漢字" placeholder="山田太郎（最大20文字）" /></input>
-				<br><span th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"></span>
-			</dd>
-		 
-		
-			<dt>氏名カナ</dt>
-			<dd>
-				<input type="text" th:field="*{employeeNameKana}" name="氏名カナ" placeholder="ヤマダタロウ（最大60文字）"/></input>
-				<br><span th:if="${#fields.hasErrors('employeeNameKana')}" th:errors="*{employeeNameKana}"></span>
-			</dd>
-			
-			<dt>性別</dt>
-			<dd><input type="radio" th:field="*{employeeGenderId}" name="性別"  value="001"/>男 
-				<input type="radio" th:field="*{employeeGenderId}" name="性別"  value="002"/>女
-				<input type="radio" th:field="*{employeeGenderId}" name="性別"  value="003"/>不明</input>
-				<br><span th:if="${#fields.hasErrors('employeeGenderId')}" th:errors="*{employeeGenderId}"></span>
-			</dd>
-		
-			<dt>年齢 </dt>
-			<dd>
-				<input type="number" th:field="*{employeeAge}" name="age">歳
-				<br><span th:if="${#fields.hasErrors('employeeAge')}" th:errors="*{employeeAge}"></span>
-			</dd>
-		
-			<div class="box">
-				<dt>所属</dt>
-				<dd><select th:field="*{employeeDepatmentId}">
-					<option value="001">所属不明</option>
-					<option value="002">管理部</option>
-					<option value="003">営業部</option>
-					<option value="004">第一開発部</option>
-					<option value="005">第二開発部</option>
-					<option value="006">人事部</option>
-					</select></dd>
-			</div>
-			
+		<form th:action="@{/emp/insert}" th:object="${addForm}" th:method="post">
+
+
+			<dl>
+				<dt>社員ID<label class="required"></label></dt>
+				<dd><input type="text" th:field="*{employeeId}" name="社員ID" style="color: gray;" readonly
+						required /></input></dd>
+
+				<dt>入社年月日</dt>
+				<dd>
+					<input type="text" th:field="*{joinDate}" onfocus="this.type='date'" onblur="this.type='text'"
+						placeholder="日付を選択してください">
+					<br><span th:if="${#fields.hasErrors('joinDate')}" th:errors="*{joinDate}"
+						class="error-message"></span>
+				</dd>
+
+				<dt>氏名漢字</dt>
+				<dd>
+					<input type="text" th:field="*{employeeName}" name="氏名漢字" placeholder="山田太郎（最大20文字）" /></input>
+					<br><span th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"
+						class="error-message"></span>
+				</dd>
+
+
+				<dt>氏名カナ</dt>
+				<dd>
+					<input type="text" th:field="*{employeeNameKana}" name="氏名カナ"
+						placeholder="ヤマダタロウ（最大60文字）" /></input>
+					<br><span th:if="${#fields.hasErrors('employeeNameKana')}" th:errors="*{employeeNameKana}"
+						class="error-message"></span>
+				</dd>
+
+				<dt>性別</dt>
+				<dd><input type="radio" th:field="*{employeeGenderId}" name="性別" value="001" />男
+					<input type="radio" th:field="*{employeeGenderId}" name="性別" value="002" />女
+					<input type="radio" th:field="*{employeeGenderId}" name="性別" value="003" />不明</input>
+					<br><span th:if="${#fields.hasErrors('employeeGenderId')}" th:errors="*{employeeGenderId}"
+						class="error-message"></span>
+				</dd>
+
+				<dt>年齢 </dt>
+				<dd>
+					<input type="number" th:field="*{employeeAge}" name="age" style="width: 40px;" min="0" max="100">歳
+					<br><span th:if="${#fields.hasErrors('employeeAge')}" th:errors="*{employeeAge}"
+						class="error-message"></span>
+				</dd>
+
+				<div class="box">
+					<dt>所属</dt>
+					<dd><select th:field="*{employeeDepatmentId}">
+							<option value="001">所属不明</option>
+							<option value="002">管理部</option>
+							<option value="003">営業部</option>
+							<option value="004">第一開発部</option>
+							<option value="005">第二開発部</option>
+							<option value="006">人事部</option>
+						</select></dd>
+				</div>
+
 				<dt>電話番号 </dt>
 				<dd>
-					<input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" placeholder="ハイフンなし（11桁まで）"/></input>
-					<br><span th:if="${#fields.hasErrors('employeePhoneNumber')}" th:errors="*{employeePhoneNumber}"></span>
+					<input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" placeholder="ハイフンなし" /></input>
+					<br><span th:if="${#fields.hasErrors('employeePhoneNumber')}" th:errors="*{employeePhoneNumber}"
+						class="error-message"></span>
 				</dd>
-			
-				<dt>メールアドレス<label class="required"></label></dt>
+
+				<dt>メールアドレス</dt>
 				<dd>
 					<input type="text" th:field="*{employeeMail}" name="メールアドレス" /></input>
-					<br><span th:if="${#fields.hasErrors('employeeMail')}" th:errors="*{employeeMail}"></span>
+					<br><span th:if="${#fields.hasErrors('employeeMail')}" th:errors="*{employeeMail}"
+						class="error-message"></span>
 				</dd>
 			</dl>
-	<br/>
-		
-		
-				<div style="text-align: right">
-					<span><input type="submit" value="登録" class="button">
-					
+			<br />
+
+
+			<div style="text-align: right">
+				<span><input type="submit" value="登録" class="button">
+
 				</span>
-				</div>
-	<br/>
-				<div style="text-align: right">
-					<button type="button" class="button" onclick="history.back()">閉じる</button> <!--resetではなく戻る動作にする-->
-				</div>
-					
-					
-        </form>
-		</div>
-    
-		</body>
+			</div>
+			<br />
+			<div style="text-align: right">
+				<button type="button" class="button" onclick="history.back()">閉じる</button>
+				<!--resetではなく戻る動作にする-->
+			</div>
+
+
+		</form>
+	</div>
+
+</body>
+
 </html>

@@ -14,15 +14,18 @@
     }
     
     dl {
-		float: left;
+		display: table;
+		table-layout: fixed;
 		width: 100%;  /*変えられない数値*/
 		border-right: 1px solid#dddddd;
 		border-bottom: 1px solid #dddddd;
     }
     dl dt {
+		display: table-cell;
         float: left;
         clear: left;
         width: 40%;
+        height:  36px;
         display: table-cell;
         vertical-align: middle;
         text-align: center;
@@ -32,13 +35,16 @@
 		border-top: 1px solid #FFFF;
     }
     dl dd {
+		display: table-cell;
         float: left;
         margin-left: 0px;
 		margin-right: 0px;
         width:250px;
+        height: 36px;
         display: table-cell;
         vertical-align: middle;
-        padding: 3.5%;
+        text-align: center;
+        padding: 3.6%;
         margin-bottom: 0px;
         padding-left : 1.1em;
 		border-top: 1px solid #dddddd;
@@ -64,7 +70,11 @@
 	.button{
 		height:40px;
 		width:100px;
-}
+		}
+	.error-message {
+		font-size: 13px;
+		color: red;
+		}
 	
 	</style>
 </head>
@@ -81,10 +91,14 @@
 		
 
 			<dt>氏名漢字</dt>
-			<dd><input type="text" th:field="*{employeeName}" name="氏名漢字" size="20"  placeholder="山田太郎（最大20文字）" maxlength="20"/></input></dd>
+			<dd>
+				<input type="text" th:field="*{employeeName}" name="氏名漢字" size="20"  placeholder="山田太郎（最大20文字）" maxlength="20"/>
+				</dd>
 		 
 		 	<dt>入社年月日</dt>
-			<dd><input type="text" th:field="*{joinDate}" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください"></dd>
+			<dd>
+				<input type="text" th:field="*{joinDate}" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください">
+				</dd>
 		
 			<dt>氏名カナ</dt>
 			<dd><input type="text" th:field="*{employeeNameKana}" name="氏名カナ" size="20"  placeholder="ヤマダタロウ（最大60文字）" maxlength="60"/></input></dd>
