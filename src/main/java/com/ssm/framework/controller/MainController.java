@@ -1,6 +1,7 @@
 package com.ssm.framework.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ssm.framework.dao.MCodeMapper;
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.entity.MCode;
+import com.ssm.framework.form.AddForm;
 import com.ssm.framework.form.LoginForm;
 import com.ssm.framework.form.UpdateForm;
 import com.ssm.framework.service.EmployeeService;
@@ -109,35 +114,47 @@ public class MainController {
 	//社員情報登録画面
 	@GetMapping(value = "/emp/add")
 	public String addView(Model model) {
-		UpdateForm updateForm = new UpdateForm();
+		AddForm addForm = new AddForm();
 		Employee emp = employeeService.findMaxIdOfEmployee();
 		Number empId = Number.class.cast(Integer.parseInt(emp.getEmployeeId().substring(3)) + 1 );
 		String empIdStr = "0000000" + empId.toString();
 		String employeeId = empIdStr.substring(empIdStr.length() - 7);
-		updateForm.setEmployeeId("NTS" + employeeId);
-		model.addAttribute("form", updateForm);
+		addForm.setEmployeeId("NTS" + employeeId);
+		model.addAttribute("addForm", addForm);
 		return "team2/register2";
 	}
 
 	//社員情報登録処理
 	@RequestMapping(value = "/emp/insert", method = RequestMethod.POST)
-	public String addToTable(UpdateForm updateForm) {
-		try {
-			
-			Random random = new Random();
-		    StringBuilder password = new StringBuilder();
-		    for (int i = 0; i < 6; i++) {
-		    	password.append(random.nextInt(10));
-		    }
-		    String encryptedPassword = DigestUtils.md5DigestAsHex(password.toString().getBytes());
-		    updateForm.setUpdateUser(password.toString());// パスワードを知るために、一時設定
-		    updateForm.setPassword(encryptedPassword);
-		    updateForm.setCreateUser(login.getEmployeeId().toString());
-			employeeService.add(updateForm); //情報挿入
-		} catch (Exception e) {
-			// TODO: handle exception
-			return "team2/addFaild";
-		}
+	public String addToTable(@Validated AddForm addForm, BindingResult result, Model model) {
+//		try {
+//			
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			//return "team2/addFaild";
+//			return "redirect:/employee/view";
+//		}
+		if (result.hasErrors()) {
+            // 入力チェックエラーの場合
+            List<String> errorList = new ArrayList<String>();
+            for (ObjectError error : result.getAllErrors()) {
+                errorList.add(error.getDefaultMessage());
+            }
+            model.addAttribute("validationError", errorList);
+            return "team2/register2";
+        }
+		
+		Random random = new Random();
+	    StringBuilder password = new StringBuilder();
+	    for (int i = 0; i < 6; i++) {
+	    	password.append(random.nextInt(10));
+	    }
+	    String encryptedPassword = DigestUtils.md5DigestAsHex(password.toString().getBytes());
+	    addForm.setUpdateUser(password.toString());// パスワードを知るために、一時設定
+	    addForm.setPassword(encryptedPassword);
+	    addForm.setCreateUser(login.getEmployeeId().toString());
+		employeeService.add(addForm); //情報挿入
 		
 		return "redirect:/employee/view";
 	}

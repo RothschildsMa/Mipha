@@ -72,31 +72,48 @@
 
 	<div class="登録フォーム">
 	<h3>社員情報登録画面</h3>
+	<div th:if="${validationError}" th:each="error : ${validationError}">
+            <label th:text="${error}"></label>
+    </div>
 	
-  <form th:action="@{/emp/insert}" th:object="${form}" th:method="post"> 
+  <form th:action="@{/emp/insert}" th:object="${addForm}" th:method="post"> 
  
 		
 		<dl>
 			<dt>社員ID<label class="required"></label></dt>
-			<dd><input type="text" th:field="*{employeeId}" pattern="^[0-9A-Z]+$"name="社員ID" size="20" placeholder="NTS0000000（10桁）" maxlength="10" style="color: gray;" readonly required/></input></dd>
+			<dd><input type="text" th:field="*{employeeId}" name="社員ID" style="color: gray;" readonly required/></input></dd>
 		
 			<dt>入社年月日</dt>
-			<dd><input type="text" th:field="*{joinDate}" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください"></dd>
+			<dd>
+				<input type="text" th:field="*{joinDate}" onfocus="this.type='date'" onblur="this.type='text'" placeholder="日付を選択してください">
+				<br><span th:if="${#fields.hasErrors('joinDate')}" th:errors="*{joinDate}"></span>
+			</dd>
 			
 			<dt>氏名漢字</dt>
-			<dd><input type="text" th:field="*{employeeName}" name="氏名漢字" size="20"  placeholder="山田太郎（最大20文字）" maxlength="20"/></input></dd>
+			<dd>
+				<input type="text" th:field="*{employeeName}" name="氏名漢字" placeholder="山田太郎（最大20文字）" /></input>
+				<br><span th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"></span>
+			</dd>
 		 
 		
 			<dt>氏名カナ</dt>
-			<dd><input type="text" th:field="*{employeeNameKana}" name="氏名カナ" size="20"  placeholder="ヤマダタロウ（最大60文字）" maxlength="60"/></input></dd>
+			<dd>
+				<input type="text" th:field="*{employeeNameKana}" name="氏名カナ" placeholder="ヤマダタロウ（最大60文字）"/></input>
+				<br><span th:if="${#fields.hasErrors('employeeNameKana')}" th:errors="*{employeeNameKana}"></span>
+			</dd>
 			
 			<dt>性別</dt>
 			<dd><input type="radio" th:field="*{employeeGenderId}" name="性別"  value="001"/>男 
 				<input type="radio" th:field="*{employeeGenderId}" name="性別"  value="002"/>女
-				<input type="radio" th:field="*{employeeGenderId}" name="性別"  value="003"/>不明</input></dd>
+				<input type="radio" th:field="*{employeeGenderId}" name="性別"  value="003"/>不明</input>
+				<br><span th:if="${#fields.hasErrors('employeeGenderId')}" th:errors="*{employeeGenderId}"></span>
+			</dd>
 		
 			<dt>年齢 </dt>
-			<dd><input type="number" th:field="*{employeeAge}" name="age" min="1" max="100">歳</dd>
+			<dd>
+				<input type="number" th:field="*{employeeAge}" name="age">歳
+				<br><span th:if="${#fields.hasErrors('employeeAge')}" th:errors="*{employeeAge}"></span>
+			</dd>
 		
 			<div class="box">
 				<dt>所属</dt>
@@ -111,10 +128,16 @@
 			</div>
 			
 				<dt>電話番号 </dt>
-				<dd><input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" pattern="[\d]*" size="20"  placeholder="ハイフンなし（11桁）" maxlength="11"/></input></dd>
+				<dd>
+					<input type="tel" th:field="*{employeePhoneNumber}" name="電話番号" placeholder="ハイフンなし（11桁まで）"/></input>
+					<br><span th:if="${#fields.hasErrors('employeePhoneNumber')}" th:errors="*{employeePhoneNumber}"></span>
+				</dd>
 			
 				<dt>メールアドレス<label class="required"></label></dt>
-				<dd><input type="email" th:field="*{employeeMail}" name="メールアドレス" size="30"  placeholder="＠を含む最大50文字" maxlength="50" required/></input></dd>
+				<dd>
+					<input type="text" th:field="*{employeeMail}" name="メールアドレス" /></input>
+					<br><span th:if="${#fields.hasErrors('employeeMail')}" th:errors="*{employeeMail}"></span>
+				</dd>
 			</dl>
 	<br/>
 		
