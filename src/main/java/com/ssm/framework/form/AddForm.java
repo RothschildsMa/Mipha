@@ -35,6 +35,7 @@ public class AddForm implements Serializable {
 	@Pattern(regexp = "^$|^[\u4E00-\u9FFF]+$", message = "漢字のみ入力してください。")
 	private String employeeName;
 
+	
 	//社員名称カナ
 	@NotBlank(message = "名前カナを入力してください")
 	@Size(max = 60, message = "60文字以内で入力してください")

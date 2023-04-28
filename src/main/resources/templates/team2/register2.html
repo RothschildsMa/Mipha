@@ -72,10 +72,7 @@
 
 	<div class="登録フォーム">
 	<h3>社員情報登録画面</h3>
-	<div th:if="${validationError}" th:each="error : ${validationError}">
-            <label th:text="${error}"></label>
-    </div>
-	
+
   <form th:action="@{/emp/insert}" th:object="${addForm}" th:method="post"> 
  
 		

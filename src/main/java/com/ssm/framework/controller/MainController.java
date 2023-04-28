@@ -1,7 +1,6 @@
 package com.ssm.framework.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -135,11 +133,11 @@ public class MainController {
 //		}
 		if (result.hasErrors()) {
             // 入力チェックエラーの場合
-            List<String> errorList = new ArrayList<String>();
-            for (ObjectError error : result.getAllErrors()) {
-                errorList.add(error.getDefaultMessage());
-            }
-            model.addAttribute("validationError", errorList);
+//            List<String> errorList = new ArrayList<String>();
+//            for (ObjectError error : result.getAllErrors()) {
+//                errorList.add(error.getDefaultMessage());
+//            }
+//            model.addAttribute("validationError", errorList);
             return "team2/register2";
         }
 		
