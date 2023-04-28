@@ -64,8 +64,6 @@ public class EmployeeService {
 		return employeeMapper.iFindMaxIdOfEmployee();
 	}
 	
-	public List<MCode> FindDepatmentName(){
-		return employeeMapper.iFindDepatmentName();
-	}
-
+	 
+	
 }

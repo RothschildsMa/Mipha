@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ssm.framework.dao.MCodeMapper;
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.entity.MCode;
 import com.ssm.framework.form.AddForm;
@@ -25,10 +26,12 @@ import com.ssm.framework.form.LoginForm;
 import com.ssm.framework.form.UpdateForm;
 import com.ssm.framework.service.EmployeeService;
 import com.ssm.framework.service.LoginService;
+import com.ssm.framework.service.MCodeService;
 
 @Controller
 public class MainController {
-
+	@Autowired
+	private MCodeService mCodeService;
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
@@ -55,7 +58,6 @@ public class MainController {
 		model.addAttribute("error",error);
 		return "team1/Login";
 	}
-
 	//ID Passwordチェック処理
 	@RequestMapping(value = "/emp/login")
 	public String check(LoginForm loginForm, Model model) {
@@ -77,7 +79,7 @@ public class MainController {
 	public String homeView(Model model) {
 		List<Employee> empList = employeeService.findAll();
 		model.addAttribute("employeeList", empList);
-		departmentList = employeeService.FindDepatmentName();
+		departmentList = mCodeService.iFindDepatmentName();
 		model.addAttribute("departmentList", departmentList);
 		return "team2/employInformationDisplay";
 	}
@@ -190,7 +192,16 @@ public class MainController {
 	//社員情報削除処理
 	@PostMapping("/deleteEmployees")
 	public String deleteEmployees(Model model, UpdateForm form,LoginForm loginForm,@RequestParam("selectedEmployees") List<Integer> selectedEmployees){
-		String loginEmployee = login.getEmployeeId();
+
+		String loginEmployee;
+		if(loginForm == null) {
+			loginEmployee = "";
+		}else {
+			loginEmployee = loginForm.getEmployeeId();
+		}
+
+		
+
 		if(!selectedEmployees.isEmpty()) {
 			for (int id : selectedEmployees) {
 				employeeService.deleteEmployees(id,loginEmployee);
