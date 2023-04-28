@@ -6,43 +6,42 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class Employee implements Serializable{
-	
-	
+public class Employee implements Serializable {
+
 	//自動採番ID
 	private int id;
-	
+
 	//社員ID
 	private String employeeId;
-	
+
 	//パスワード
 	private String password;
-	
+
 	//入社年月日
 	private Date joinDate;
-	
+
 	//社員名称漢字
 	private String employeeName;
-	
+
 	//社員名称カナ
 	private String employeeNameKana;
-	
+
 	//性別ID
 	private String employeeGenderId;
-	
+
 	private String genderName;
-	
+
 	//年齢
 	private int employeeAge;
-	
+
 	//所属ID
 	private String employeeDepatmentId;
-	
+
 	private String depatmentName;
-	
+
 	//電話番号
 	private String employeePhoneNumber;
-	
+
 	//社員メールアドレス
 	private String employeeMail;
 
@@ -62,6 +61,5 @@ public class Employee implements Serializable{
 	private int updateUser;
 
 	private boolean checked;
-	
 
 }
