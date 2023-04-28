@@ -1,18 +1,16 @@
 package com.ssm.framework.form;
 
-import java.io.Serializable;
-
 import lombok.Data;
 
 @Data
-public class UpdateForm implements Serializable {
-
+public class AddForm {
 	//社員ID
 	private String employeeId;
 
 	//パスワード
 	private String password;
-
+	
+	
 	//入社年月日
 	private String joinDate;
 
@@ -36,16 +34,11 @@ public class UpdateForm implements Serializable {
 
 	//社員メールアドレス
 	private String employeeMail;
-	
-	private String updateDate;
-	
-	private String updateUser;
-	
-	//入社年月日
-	private String startDate;
-		
-	//入社年月日
-	private String endDate;
 
-	private String createUser;
+	private String updateDate;
+
+	private String updateUser;
+
+
+	
 }

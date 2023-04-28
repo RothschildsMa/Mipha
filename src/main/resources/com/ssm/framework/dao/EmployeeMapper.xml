@@ -44,10 +44,10 @@
     
      <!-- 登録 -->
 	<insert id="add">
-	  INSERT INTO T_employee (EMPLOYEE_ID, JOIN_DATE, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA, 
-	  EMPLOYEE_GENDERID, EMPLOYEE_AGE, EMPLOYEE_DEPATMENTID, EMPLOYEE_PHONENUMBER, EMPLOYEE_MAIL)
-	  VALUES (#{employeeId}, #{joinDate}, #{employeeName}, #{employeeNameKana}, #{employeeGenderId},
-	   #{employeeAge}, #{employeeDepatmentId}, #{employeePhoneNumber}, #{employeeMail})
+	  INSERT INTO T_employee (EMPLOYEE_ID,PASSWORD, JOIN_DATE, EMPLOYEE_NAME, EMPLOYEE_NAMEKANA, 
+	  EMPLOYEE_GENDERID, EMPLOYEE_AGE, EMPLOYEE_DEPATMENTID, EMPLOYEE_PHONENUMBER, EMPLOYEE_MAIL,CREATE_DATE,UPDATE_USER)
+	  VALUES (#{employeeId},#{password}, #{joinDate}, #{employeeName}, #{employeeNameKana}, #{employeeGenderId},
+	   #{employeeAge}, #{employeeDepatmentId}, #{employeePhoneNumber}, #{employeeMail},sysdate(), #{updateUser})
 	</insert>
 	
 	<!-- 更新 -->
