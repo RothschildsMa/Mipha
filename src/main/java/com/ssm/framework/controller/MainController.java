@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ssm.framework.dao.MCodeMapper;
 import com.ssm.framework.entity.Employee;
 import com.ssm.framework.entity.MCode;
 import com.ssm.framework.form.AddForm;
@@ -188,6 +187,7 @@ public class MainController {
 		return "redirect:/employee/view"; 
 	}
 
+	
 
 	//社員情報削除処理
 	@PostMapping("/deleteEmployees")
